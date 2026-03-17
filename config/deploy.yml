@@ -1,13 +1,13 @@
 # Name of your application. Used to uniquely configure containers.
-service: music
+service: musicapp
 
 # Name of the container image (use your-user/app-name on external registries).
-image: music
+image: robbity/musicapp
 
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    - 35.178.83.191
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -19,7 +19,7 @@ servers:
 # Using an SSL proxy like this requires turning on config.assume_ssl and config.force_ssl in production.rb!
 #
 # Don't use this when deploying to multiple web servers (then you have to terminate SSL at your load balancer).
-#
+# TODO
 # proxy:
 #   ssl: true
 #   host: app.example.com
@@ -27,19 +27,20 @@ servers:
 # Where you keep your container images.
 registry:
   # Alternatives: hub.docker.com / registry.digitalocean.com / ghcr.io / ...
-  server: localhost:5555
+  # server: localhost:5555
 
   # Needed for authenticated registries.
-  # username: your-user
+  username: robbity
 
   # Always use an access token rather than real password when possible.
-  # password:
-  #   - KAMAL_REGISTRY_PASSWORD
+  password:
+    - KAMAL_REGISTRY_PASSWORD
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 env:
   secret:
     - RAILS_MASTER_KEY
+    - DATABASE_URL
   clear:
     # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.
     # When you start using multiple servers, you should split out job processing to a dedicated machine.
@@ -91,8 +92,10 @@ builder:
   #   - RAILS_MASTER_KEY
 
 # Use a different ssh user than root
-# ssh:
-#   user: app
+ssh:
+  user: ubuntu
+  keys:
+    - ~/.ssh/LightsailDefaultKey-eu-west-2.pem
 
 # Use accessory services (secrets come from .kamal/secrets).
 # accessories:
@@ -117,3 +120,17 @@ builder:
 #     port: 6379
 #     directories:
 #       - data:/data
+
+accessories:
+  db:
+    image: postgres:16
+    host: 35.178.83.191
+    port: "127.0.0.1:5432:5432"
+    env:
+      clear:
+        POSTGRES_DB: music_production
+        POSTGRES_USER: music
+      secret:
+        - POSTGRES_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data
