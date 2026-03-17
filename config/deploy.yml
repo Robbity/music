@@ -82,6 +82,9 @@ asset_path: /rails/public/assets
 # Configure the image builder.
 builder:
   arch: amd64
+  remote: ssh://ubuntu@35.178.83.191
+  keys:
+    - ~/.ssh/LightsailDefaultKey-eu-west-2.pem
 
   # # Build image via remote server (useful for faster amd64 builds on arm64 computers)
   # remote: ssh://docker@docker-builder-server
