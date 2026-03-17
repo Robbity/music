@@ -3,7 +3,7 @@ service: musicapp
 
 # Name of the container image (use your-user/app-name on external registries).
 # image: robbity/musicapp docker
-image: ghcr.io/robbity/musicapp
+image: robbity/musicapp
 
 # Deploy to these servers.
 servers:
