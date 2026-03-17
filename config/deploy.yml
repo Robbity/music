@@ -2,7 +2,6 @@
 service: musicapp
 
 # Name of the container image (use your-user/app-name on external registries).
-# image: robbity/musicapp docker
 image: robbity/musicapp
 
 # Deploy to these servers.
@@ -28,11 +27,10 @@ servers:
 # Where you keep your container images.
 registry:
   # Alternatives: hub.docker.com / registry.digitalocean.com / ghcr.io / ...
-  # server: hub.docker.com
-  server: ghcr.io
+  # server: localhost:5555
 
   # Needed for authenticated registries.
-  username: Robbity
+  username: robbity
 
   # Always use an access token rather than real password when possible.
   password:
@@ -82,9 +80,6 @@ asset_path: /rails/public/assets
 # Configure the image builder.
 builder:
   arch: amd64
-  remote: ssh://ubuntu@35.178.83.191
-  keys:
-    - ~/.ssh/LightsailDefaultKey-eu-west-2.pem
 
   # # Build image via remote server (useful for faster amd64 builds on arm64 computers)
   # remote: ssh://docker@docker-builder-server
