@@ -2,7 +2,8 @@
 service: musicapp
 
 # Name of the container image (use your-user/app-name on external registries).
-image: robbity/musicapp
+# image: robbity/musicapp docker
+image: ghcr.io/robbity/musicapp
 
 # Deploy to these servers.
 servers:
@@ -27,10 +28,11 @@ servers:
 # Where you keep your container images.
 registry:
   # Alternatives: hub.docker.com / registry.digitalocean.com / ghcr.io / ...
-  # server: localhost:5555
+  # server: hub.docker.com
+  server: ghcr.io
 
   # Needed for authenticated registries.
-  username: robbity
+  username: Robbity
 
   # Always use an access token rather than real password when possible.
   password:
