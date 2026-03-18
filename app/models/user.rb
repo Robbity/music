@@ -7,4 +7,6 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   attr_readonly :username
+
+  has_many :songs, dependent: :destroy
 end

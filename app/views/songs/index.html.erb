@@ -1,0 +1,23 @@
+<h1>Your uploads</h1>
+
+<% if @songs.any? %>
+  <ul>
+    <% @songs.each do |song| %>
+      <li>
+        <strong><%= song.title %></strong>
+        by <%= song.user.username %>
+        <% if song.artwork.attached? %>
+          <div>
+            <%= image_tag song.artwork, alt: "Artwork for #{song.title}" %>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No songs yet.</p>
+<% end %>
+
+<p>
+  <%= link_to "Upload a song", new_song_path %>
+</p>
