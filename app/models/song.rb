@@ -1,5 +1,6 @@
 class Song < ApplicationRecord
   belongs_to :user
+  has_many :ratings, dependent: :destroy
 
   has_one_attached :audio_file
   has_one_attached :artwork
@@ -12,7 +13,14 @@ class Song < ApplicationRecord
 
   MAX_AUDIO_SIZE = 20.megabytes
   MAX_ARTWORK_SIZE = 5.megabytes
-  AUDIO_CONTENT_TYPES = [ "audio/mpeg", "audio/mp3", "audio/wav" ].freeze
+  AUDIO_CONTENT_TYPES = [
+    "audio/mpeg",
+    "audio/mp3",
+    "audio/wav",
+    "audio/x-wav",
+    "audio/wave",
+    "audio/vnd.wave"
+  ].freeze
   ARTWORK_CONTENT_TYPES = [ "image/jpeg", "image/png" ].freeze
 
   private

@@ -24,6 +24,24 @@
   </head>
 
   <body>
+    <header class="navbar" data-controller="navbar">
+      <div class="navbar__brand">
+        <%= link_to "True Shuffle", root_path, class: "navbar__logo" %>
+      </div>
+
+      <button class="navbar__toggle" type="button" data-action="navbar#toggle" aria-expanded="false" aria-controls="navbar-menu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+
+      <nav id="navbar-menu" class="navbar__menu" data-navbar-target="menu">
+        <%= link_to "Listened", library_index_path, class: "navbar__link" %>
+        <%= link_to "Uploaded", songs_path, class: "navbar__link" %>
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "navbar__link navbar__button" %>
+      </nav>
+    </header>
+
     <% if notice.present? %>
       <p class="notice"><%= notice %></p>
     <% end %>
@@ -31,6 +49,8 @@
       <p class="alert"><%= alert %></p>
     <% end %>
 
-    <%= yield %>
+    <main class="page">
+      <%= yield %>
+    </main>
   </body>
 </html>

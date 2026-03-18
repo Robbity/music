@@ -9,4 +9,5 @@ class User < ApplicationRecord
   attr_readonly :username
 
   has_many :songs, dependent: :destroy
+  has_many :ratings, dependent: :destroy
 end
