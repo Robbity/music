@@ -1,0 +1,26 @@
+<h1>Listened</h1>
+
+<% if @ratings.any? %>
+  <ul class="library">
+    <% @ratings.each do |rating| %>
+      <li class="library__item">
+        <div class="library__artwork">
+          <% if rating.song.artwork.attached? %>
+            <%= image_tag rating.song.artwork, alt: "Artwork for #{rating.song.title}" %>
+          <% else %>
+            <div class="library__placeholder">No artwork</div>
+          <% end %>
+        </div>
+        <div>
+          <strong><%= rating.song.title %></strong>
+          <div>by <%= rating.song.user.username %></div>
+          <div class="library__rating">
+            Rating: <%= "★" * rating.stars %><%= "☆" * (5 - rating.stars) %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have not rated any songs yet.</p>
+<% end %>

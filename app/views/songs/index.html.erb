@@ -1,23 +1,33 @@
 <h1>Your uploads</h1>
 
 <% if @songs.any? %>
-  <ul>
+  <ul class="library">
     <% @songs.each do |song| %>
-      <li>
-        <strong><%= song.title %></strong>
-        by <%= song.user.username %>
-        <% if song.artwork.attached? %>
-          <div>
+      <% average = song.ratings.average(:stars) %>
+      <% rating_count = song.ratings.size %>
+      <li class="library__item">
+        <div class="library__artwork">
+          <% if song.artwork.attached? %>
             <%= image_tag song.artwork, alt: "Artwork for #{song.title}" %>
+          <% else %>
+            <div class="library__placeholder">No artwork</div>
+          <% end %>
+        </div>
+        <div>
+          <strong><%= song.title %></strong>
+          <div>by <%= song.user.username %></div>
+          <div>
+            <% if average.present? %>
+              Average rating: <%= average.round(1) %> / 5
+            <% else %>
+              No ratings yet
+            <% end %>
+            (<%= rating_count %> ratings)
           </div>
-        <% end %>
+        </div>
       </li>
     <% end %>
   </ul>
 <% else %>
   <p>No songs yet.</p>
 <% end %>
-
-<p>
-  <%= link_to "Upload a song", new_song_path %>
-</p>
