@@ -1,0 +1,31 @@
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<h1>Sign up</h1>
+
+<%= form_with model: @user do |form| %>
+  <div>
+    <%= form.label :email_address, "Email" %><br>
+    <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username" %>
+  </div>
+
+  <div>
+    <%= form.label :password, "Password" %><br>
+    <%= form.password_field :password, required: true, autocomplete: "new-password", maxlength: 72 %>
+  </div>
+
+  <% if @user.errors.any? %>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form.submit "Create account" %>
+<% end %>
+
+<p>
+  Already have an account?
+  <%= link_to "Sign in", new_session_path %>
+</p>
