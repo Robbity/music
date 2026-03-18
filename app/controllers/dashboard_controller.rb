@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
-  before_action :require_authentication
+  before_action :authenticate_user!
 
   def show
-    @user = Current.session.user
+    @user = current_user
   end
 end

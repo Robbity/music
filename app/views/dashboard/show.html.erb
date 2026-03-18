@@ -3,6 +3,6 @@
 
 <h1>Welcome</h1>
 
-<p>Signed in as <strong><%= @user.email_address %></strong></p>
+<p>Signed in as <strong><%= @user.email %></strong></p>
 
-<%= button_to "Sign out", session_path, method: :delete %>
+<%= button_to "Sign out", destroy_user_session_path, method: :delete %>

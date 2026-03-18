@@ -9,10 +9,15 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  resource :session
-  resources :passwords, param: :token
-  resources :users, only: %i[new create]
+  devise_for :users
 
-  # Defines the root path route ("/")
-  root "dashboard#show"
+  authenticated :user do
+    root "dashboard#show", as: :authenticated_root
+  end
+
+  devise_scope :user do
+    unauthenticated do
+      root "devise/sessions#new", as: :unauthenticated_root
+    end
+  end
 end
