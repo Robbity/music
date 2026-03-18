@@ -1,0 +1,44 @@
+<div class="listen" data-controller="listen">
+  <% if @song.present? %>
+    <div class="listen__artwork">
+      <% if @song.artwork.attached? %>
+        <%= image_tag @song.artwork, alt: "Artwork for #{@song.title}", class: "listen__image" %>
+      <% else %>
+        <div class="listen__placeholder">No artwork</div>
+      <% end %>
+    </div>
+
+    <div class="listen__meta">
+      <h1><%= @song.title %></h1>
+      <p>Uploaded by <strong><%= @song.user.username %></strong></p>
+    </div>
+
+    <div class="listen__player">
+      <audio controls data-listen-target="audio" data-action="ended->listen#enableRating">
+        <source src="<%= url_for(@song.audio_file) %>">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="listen__rating hidden" data-listen-target="rating">
+      <%= form_with url: ratings_path, scope: :rating do |form| %>
+        <%= form.hidden_field :song_id, value: @song.id %>
+
+        <fieldset class="rating" data-listen-target="stars">
+          <legend>Rate this song</legend>
+          <% 5.downto(1) do |star| %>
+            <%= form.radio_button :stars, star, id: "rating_#{star}" %>
+            <%= form.label :stars, "#{"★" * star}", for: "rating_#{star}" %>
+          <% end %>
+        </fieldset>
+
+        <%= form.submit "Submit rating", data: { listen_target: "submit" } %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="listen__empty">
+      <h1>No songs available right now — upload one to get started</h1>
+      <%= link_to "Upload a song", new_song_path %>
+    </div>
+  <% end %>
+</div>

@@ -2,7 +2,10 @@ class SongsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @songs = current_user.songs.with_attached_artwork.order(created_at: :desc)
+    @songs = current_user.songs
+      .with_attached_artwork
+      .includes(:ratings)
+      .order(created_at: :desc)
   end
 
   def new
