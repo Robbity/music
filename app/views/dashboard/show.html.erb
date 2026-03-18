@@ -5,4 +5,10 @@
 
 <p>Signed in as <strong><%= @user.email %></strong></p>
 
+<p>
+  <%= link_to "Upload a song", new_song_path %>
+  |
+  <%= link_to "Your uploads", songs_path %>
+</p>
+
 <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
