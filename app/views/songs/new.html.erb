@@ -1,0 +1,32 @@
+<h1>Upload a song</h1>
+
+<% if @song.errors.any? %>
+  <ul>
+    <% @song.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @song do |form| %>
+  <div>
+    <%= form.label :title, "Title" %><br>
+    <%= form.text_field :title, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :audio_file, "Audio file" %><br>
+    <%= form.file_field :audio_file, required: true, direct_upload: true %>
+  </div>
+
+  <div>
+    <%= form.label :artwork, "Artwork (optional)" %><br>
+    <%= form.file_field :artwork %>
+  </div>
+
+  <%= form.submit "Upload" %>
+<% end %>
+
+<p>
+  <%= link_to "View your uploads", songs_path %>
+</p>
