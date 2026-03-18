@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   devise_for :users
+  resources :songs, only: %i[new create index]
 
   authenticated :user do
     root "dashboard#show", as: :authenticated_root

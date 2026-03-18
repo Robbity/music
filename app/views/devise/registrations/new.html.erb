@@ -10,8 +10,13 @@
 
 <%= form_with model: resource, as: resource_name, url: registration_path(resource_name) do |form| %>
   <div>
+    <%= form.label :username, "Username" %><br>
+    <%= form.text_field :username, required: true, autofocus: true, autocomplete: "username" %>
+  </div>
+
+  <div>
     <%= form.label :email, "Email" %><br>
-    <%= form.email_field :email, required: true, autofocus: true, autocomplete: "username" %>
+    <%= form.email_field :email, required: true, autocomplete: "email" %>
   </div>
 
   <div>
