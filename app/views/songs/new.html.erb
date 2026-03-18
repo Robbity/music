@@ -16,12 +16,12 @@
 
   <div>
     <%= form.label :audio_file, "Audio file" %><br>
-    <%= form.file_field :audio_file, required: true, direct_upload: true %>
+    <%= form.file_field :audio_file, required: true, direct_upload: true, accept: "audio/mpeg,audio/mp3,audio/wav" %>
   </div>
 
   <div>
     <%= form.label :artwork, "Artwork (optional)" %><br>
-    <%= form.file_field :artwork %>
+    <%= form.file_field :artwork, accept: "image/jpeg,image/png" %>
   </div>
 
   <%= form.submit "Upload" %>
