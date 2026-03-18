@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   devise_for :users
   root "listen#index"
 
-  resource :listen, only: %i[index]
+  resources :listen, only: %i[index]
   resources :ratings, only: %i[create]
   resources :songs, only: %i[new create index]
   resources :library, only: %i[index]
