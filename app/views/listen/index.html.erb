@@ -40,46 +40,28 @@
       </div>
     </section>
   <% elsif @song.present? %>
-    <div class="listen__artwork" style="background-color: <%= @song.artwork_color %>">
-      <% if @song.artwork.attached? %>
-        <%= image_tag @song.artwork, alt: "Artwork for #{@song.title}", class: "listen__image" %>
-      <% else %>
-        <div class="listen__placeholder"></div>
-      <% end %>
-    </div>
-
-    <div class="listen__meta">
-      <h1><%= @song.title %></h1>
-      <p>Uploaded by <strong><%= @song.user.username %></strong></p>
-    </div>
-
-    <div class="listen__player">
-      <div class="listen__controls">
-        <button class="button" type="button" data-action="listen#togglePlayback" data-listen-target="play">Play</button>
-        <input class="listen__volume" type="range" min="0" max="1" step="0.01" value="1" data-action="input->listen#setVolume" data-listen-target="volume">
-      </div>
-    </div>
-
-    <div class="listen__post hidden" data-listen-target="post">
-      <div class="listen__post-actions">
-        <button class="button" type="button" data-action="listen#showRating">Rating</button>
-        <button class="button button--ghost" type="button" data-action="listen#showRating">Add to library?</button>
-      </div>
-
-      <div class="listen__rating hidden" data-listen-target="rating">
-        <%= form_with url: ratings_path, scope: :rating do |form| %>
-          <%= form.hidden_field :song_id, value: @song.id %>
-
-          <fieldset class="rating" data-listen-target="stars">
-            <legend>Rate this song</legend>
-            <% 5.downto(1) do |star| %>
-              <%= form.radio_button :stars, star, id: "rating_#{star}" %>
-              <%= form.label :stars, "#{"★" * star}", for: "rating_#{star}" %>
-            <% end %>
-          </fieldset>
-
-          <%= form.submit "Submit rating", data: { listen_target: "submit" } %>
+    <div class="listen__card">
+      <div class="listen__artwork" style="background-color: <%= @song.artwork_color %>">
+        <% if @song.artwork.attached? %>
+          <%= image_tag @song.artwork, alt: "Artwork for #{@song.title}", class: "listen__image" %>
+        <% else %>
+          <div class="listen__placeholder"></div>
         <% end %>
+      </div>
+
+      <div class="listen__meta">
+        <h1><%= @song.title %></h1>
+        <p>Uploaded by <strong><%= @song.user.username %></strong></p>
+      </div>
+
+      <div class="listen__player">
+        <div class="listen__controls">
+          <button class="button" type="button" data-action="listen#togglePlayback" data-listen-target="play">Play</button>
+        </div>
+      </div>
+
+      <div id="listen-actions">
+        <%= render "rating_form", song: @song, errors: nil %>
       </div>
     </div>
   <% else %>

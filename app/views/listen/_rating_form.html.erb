@@ -1,0 +1,23 @@
+<div class="listen__rating hidden" data-listen-target="rating">
+  <% if errors&.any? %>
+    <ul>
+      <% errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_with url: ratings_path, scope: :rating do |form| %>
+    <%= form.hidden_field :song_id, value: song.id %>
+
+    <fieldset class="rating" data-listen-target="stars">
+      <legend>Rate this song</legend>
+      <% 5.downto(1) do |star| %>
+        <%= form.radio_button :stars, star, id: "rating_#{star}" %>
+        <%= form.label :stars, "★", for: "rating_#{star}" %>
+      <% end %>
+    </fieldset>
+
+    <%= form.submit "Submit rating", data: { listen_target: "submit" }, class: "button" %>
+  <% end %>
+</div>
