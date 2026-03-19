@@ -47,25 +47,33 @@ export default class extends Controller {
 
     this.audioTarget.src = url
     this.currentUrl = url
-    this.titleTarget.textContent = title || "Untitled"
-    this.artistTarget.textContent = artist || ""
+    if (this.hasTitleTarget) {
+      this.titleTarget.textContent = title || "Untitled"
+    }
+    if (this.hasArtistTarget) {
+      this.artistTarget.textContent = artist || ""
+    }
 
-    if (artwork) {
-      this.artworkTarget.style.backgroundImage = `url('${artwork}')`
-      this.artworkTarget.textContent = ""
-    } else {
-      this.artworkTarget.style.backgroundImage = "none"
-      this.artworkTarget.textContent = "TS"
+    if (this.hasArtworkTarget) {
+      if (artwork) {
+        this.artworkTarget.style.backgroundImage = `url('${artwork}')`
+        this.artworkTarget.textContent = ""
+      } else {
+        this.artworkTarget.style.backgroundImage = "none"
+        this.artworkTarget.textContent = "TS"
+      }
     }
 
     this.containerTarget.classList.remove("hidden")
     this.containerTarget.classList.toggle("player--locked", locked)
 
-    if (locked) {
-      this.scrubTarget.value = 0
-      this.scrubTarget.disabled = true
-    } else {
-      this.scrubTarget.disabled = false
+    if (this.hasScrubTarget) {
+      if (locked) {
+        this.scrubTarget.value = 0
+        this.scrubTarget.disabled = true
+      } else {
+        this.scrubTarget.disabled = false
+      }
     }
 
     if (autoplay || autoplay === undefined) {
@@ -100,16 +108,19 @@ export default class extends Controller {
   }
 
   syncScrubRange() {
+    if (!this.hasScrubTarget) return
     this.scrubTarget.value = 0
   }
 
   updateScrub() {
+    if (!this.hasScrubTarget) return
     if (!this.audioTarget.duration) return
     const progress = (this.audioTarget.currentTime / this.audioTarget.duration) * 100
     this.scrubTarget.value = progress
   }
 
   updateToggleLabel() {
+    if (!this.hasToggleTarget) return
     this.toggleTarget.textContent = this.audioTarget.paused ? "Play" : "Pause"
   }
 }

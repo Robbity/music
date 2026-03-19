@@ -511,10 +511,15 @@ body {
   justify-content: center;
   background-size: cover;
   background-position: center;
+  cursor: pointer;
 }
 
 .upload__artwork--filled {
   color: transparent;
+}
+
+.upload__artwork input[type="file"] {
+  display: none;
 }
 
 .upload__drop {
