@@ -1,30 +1,39 @@
+<% palette = ["#efe6df", "#f0e8d7", "#e6ece8", "#e5e1f0", "#f0e5ea", "#e6edf2", "#efe9d8"] %>
+
 <section class="upload">
-  <h1>Upload new song</h1>
+  <div class="upload__card">
+    <h1>Upload new song</h1>
 
-  <% if @song.errors.any? %>
-    <ul>
-      <% @song.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
+    <% if @song.errors.any? %>
+      <ul>
+        <% @song.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
 
-  <%= form_with model: @song do |form| %>
-    <div class="upload__art">
-      <%= form.label :artwork, "Artwork (optional)" %><br>
-      <%= form.file_field :artwork, accept: "image/jpeg,image/png" %>
+    <div class="upload__artwork" data-controller="artwork" data-artwork-target="preview" style="background-color: <%= palette.sample %>">
+      <span>Artwork</span>
     </div>
 
-    <div class="upload__field">
-      <%= form.label :title, "Name" %><br>
-      <%= form.text_field :title, required: true %>
-    </div>
+    <%= form_with model: @song do |form| %>
+      <div class="auth__field">
+        <%= form.label :title, "Song name" %><br>
+        <%= form.text_field :title, required: true, class: "upload__input" %>
+      </div>
 
-    <div class="upload__field">
-      <%= form.label :audio_file, "Audio file" %><br>
-      <%= form.file_field :audio_file, required: true, direct_upload: true, accept: "audio/mpeg,audio/mp3,audio/wav,audio/x-wav,audio/wave,audio/vnd.wave" %>
-    </div>
+      <label class="upload__drop">
+        <span>Click or drag audio here</span>
+        <small>MP3 or WAV</small>
+        <%= form.file_field :audio_file, required: true, direct_upload: true, accept: "audio/mpeg,audio/mp3,audio/wav,audio/x-wav,audio/wave,audio/vnd.wave" %>
+      </label>
 
-    <%= form.submit "Upload", class: "button" %>
-  <% end %>
+      <div class="upload__optional">
+        <%= form.label :artwork, "Add artwork (optional)" %>
+        <%= form.file_field :artwork, accept: "image/jpeg,image/png", data: { action: "change->artwork#preview", artwork_target: "input" } %>
+      </div>
+
+      <%= form.submit "Upload", class: "button" %>
+    <% end %>
+  </div>
 </section>

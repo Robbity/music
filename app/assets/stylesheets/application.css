@@ -492,6 +492,49 @@ body {
   gap: 8px;
 }
 
+.upload__card {
+  border: 2px solid #000000;
+  padding: 40px;
+  display: grid;
+  gap: 20px;
+  text-align: center;
+}
+
+.upload__artwork {
+  width: 220px;
+  height: 220px;
+  border: 2px solid #000000;
+  border-radius: 18px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.upload__artwork--filled {
+  color: transparent;
+}
+
+.upload__drop {
+  border: 2px dashed #000000;
+  padding: 20px;
+  display: grid;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.upload__drop input[type="file"] {
+  display: none;
+}
+
+.upload__optional {
+  display: grid;
+  gap: 8px;
+  text-align: left;
+}
+
 .player__scrub {
   width: 100%;
 }
@@ -548,4 +591,10 @@ body {
 }
 .player--locked .player__scrub {
   display: none;
+}
+.upload__input {
+  padding: 14px 16px;
+  border: 1px solid #000000;
+  font-size: 18px;
+  width: 100%;
 }
