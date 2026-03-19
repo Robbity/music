@@ -10,4 +10,15 @@ class User < ApplicationRecord
 
   has_many :songs, dependent: :destroy
   has_many :ratings, dependent: :destroy
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    login = conditions.delete(:email)
+
+    if login
+      where(conditions).where("lower(email) = :value OR lower(username) = :value", value: login.downcase).first
+    else
+      where(conditions).first
+    end
+  end
 end

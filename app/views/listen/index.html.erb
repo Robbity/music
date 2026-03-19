@@ -1,5 +1,45 @@
 <div class="listen" data-controller="listen" data-listen-url-value="<%= @song ? url_for(@song.audio_file) : "" %>" data-listen-title-value="<%= @song&.title %>" data-listen-artist-value="<%= @song&.user&.username %>" data-listen-artwork-value="<%= @song&.artwork&.attached? ? url_for(@song.artwork) : "" %>">
-  <% if @song.present? %>
+  <% if !user_signed_in? %>
+    <section class="guest">
+      <div class="guest__card">
+        <h1>Shuffle</h1>
+        <p>Discover music anonymously. Listen once, rate once, move on.</p>
+
+        <% if @song.present? %>
+          <div class="guest__song">
+            <div class="guest__artwork">
+              <% if @song.artwork.attached? %>
+                <%= image_tag @song.artwork, alt: "Artwork for #{@song.title}" %>
+              <% else %>
+                <div class="guest__placeholder">No artwork</div>
+              <% end %>
+              <button
+                class="guest__overlay"
+                type="button"
+                data-action="player#playFromCard"
+                data-player-url="<%= url_for(@song.audio_file) %>"
+                data-player-title="<%= @song.title %>"
+                data-player-artist="<%= @song.user.username %>"
+                data-player-artwork="<%= @song.artwork.attached? ? url_for(@song.artwork) : "" %>"
+                data-player-locked="true"
+              >▶</button>
+            </div>
+            <div class="guest__meta">
+              <strong><%= @song.title %></strong>
+              <div><%= @song.user.username %></div>
+            </div>
+          </div>
+        <% else %>
+          <p>No songs available right now — upload one to get started</p>
+        <% end %>
+
+        <div class="guest__actions">
+          <%= link_to "Sign in", new_user_session_path, class: "button" %>
+          <%= link_to "Create account", new_user_registration_path, class: "button button--ghost" %>
+        </div>
+      </div>
+    </section>
+  <% elsif @song.present? %>
     <div class="listen__artwork">
       <% if @song.artwork.attached? %>
         <%= image_tag @song.artwork, alt: "Artwork for #{@song.title}", class: "listen__image" %>

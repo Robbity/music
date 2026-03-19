@@ -7,6 +7,7 @@ export default class extends Controller {
     if (!this.hasContainerTarget) return
 
     this.containerTarget.classList.add("hidden")
+    this.currentUrl = null
     this.audioTarget.addEventListener("timeupdate", () => this.updateScrub())
     this.audioTarget.addEventListener("loadedmetadata", () => this.syncScrubRange())
     this.audioTarget.addEventListener("ended", () => {
@@ -26,12 +27,17 @@ export default class extends Controller {
     const url = card.dataset.playerUrl
     if (!url) return
 
+    if (this.currentUrl === url) {
+      this.toggle()
+      return
+    }
+
     this.load({
       url,
       title: card.dataset.playerTitle,
       artist: card.dataset.playerArtist,
       artwork: card.dataset.playerArtwork,
-      locked: false,
+      locked: card.dataset.playerLocked === "true",
       autoplay: true
     })
   }
@@ -40,6 +46,7 @@ export default class extends Controller {
     if (!url) return
 
     this.audioTarget.src = url
+    this.currentUrl = url
     this.titleTarget.textContent = title || "Untitled"
     this.artistTarget.textContent = artist || ""
 
@@ -72,8 +79,10 @@ export default class extends Controller {
   toggle() {
     if (this.audioTarget.paused) {
       this.audioTarget.play()
+      this.containerTarget.classList.remove("hidden")
     } else {
       this.audioTarget.pause()
+      this.containerTarget.classList.add("hidden")
     }
     this.updateToggleLabel()
     window.dispatchEvent(new CustomEvent("player:state", { detail: { playing: !this.audioTarget.paused } }))
