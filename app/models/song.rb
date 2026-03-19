@@ -11,6 +11,8 @@ class Song < ApplicationRecord
   validate :audio_file_type_and_size
   validate :artwork_type_and_size
 
+  before_validation :set_artwork_color, on: :create
+
   MAX_AUDIO_SIZE = 20.megabytes
   MAX_ARTWORK_SIZE = 5.megabytes
   AUDIO_CONTENT_TYPES = [
@@ -24,6 +26,22 @@ class Song < ApplicationRecord
   ARTWORK_CONTENT_TYPES = [ "image/jpeg", "image/png" ].freeze
 
   private
+    def set_artwork_color
+      return if artwork_color.present?
+
+      palette = [
+        "#efe6df",
+        "#f0e8d7",
+        "#e6ece8",
+        "#e5e1f0",
+        "#f0e5ea",
+        "#e6edf2",
+        "#efe9d8"
+      ]
+
+      self.artwork_color = palette.sample
+    end
+
     def audio_file_type_and_size
       return unless audio_file.attached?
 

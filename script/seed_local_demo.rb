@@ -29,6 +29,7 @@ def find_or_create_song(user, title)
 
   wav = make_silent_wav
   song.audio_file.attach(io: wav, filename: "#{title.parameterize}.wav", content_type: "audio/wav")
+  song.artwork_color ||= [ "#efe6df", "#f0e8d7", "#e6ece8", "#e5e1f0", "#f0e5ea", "#e6edf2", "#efe9d8" ].sample
   song.save!
   wav.close
   wav.unlink

@@ -1,23 +1,21 @@
 class ListenController < ApplicationController
   def index
-    @song = next_song_for(user_signed_in? ? current_user : nil)
+    @song = song_of_the_day
     @song&.increment!(:plays_count)
   end
 
   private
-    def next_song_for(user)
+    def song_of_the_day
       scope = Song
         .with_attached_artwork
         .with_attached_audio_file
         .includes(:user)
+        .order(:id)
 
-      if user
-        scope = scope
-          .where.not(user_id: user.id)
-          .where.not(id: Rating.where(user_id: user.id).select(:song_id))
-      end
+      count = scope.count
+      return nil if count.zero?
 
-      scope.order(Arel.sql("RANDOM()"))
-        .first
+      day_index = (Time.now.utc.to_i / 86_400) % count
+      scope.offset(day_index).first
     end
 end
