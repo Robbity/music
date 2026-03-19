@@ -18,9 +18,19 @@ export default class extends Controller {
       window.dispatchEvent(new CustomEvent("player:state", { detail: { playing: false } }))
     })
 
-    window.addEventListener("player:load", (event) => this.load(event.detail))
-    window.addEventListener("player:toggle", () => this.toggle())
-    window.addEventListener("player:volume", (event) => this.setVolume(event))
+    this.handleLoad = (event) => this.load(event.detail)
+    this.handleToggle = () => this.toggle()
+    this.handleVolume = (event) => this.setVolume(event)
+
+    window.addEventListener("player:load", this.handleLoad)
+    window.addEventListener("player:toggle", this.handleToggle)
+    window.addEventListener("player:volume", this.handleVolume)
+  }
+
+  disconnect() {
+    window.removeEventListener("player:load", this.handleLoad)
+    window.removeEventListener("player:toggle", this.handleToggle)
+    window.removeEventListener("player:volume", this.handleVolume)
   }
 
   playFromCard(event) {
