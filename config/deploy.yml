@@ -22,7 +22,7 @@ servers:
 # TODO
 proxy:
   ssl: true
-  host: music.laughlen.com #REMEMBER TO CHANGE PLS
+  host: shuffle.laughlen.com 
 
 # Where you keep your container images.
 registry:
