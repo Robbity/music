@@ -313,6 +313,9 @@ body {
   padding: 32px;
   display: grid;
   gap: 20px;
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .listen__prompt {
@@ -325,18 +328,12 @@ body {
   padding: 0;
   margin: 0 0 16px;
   display: inline-flex;
-  flex-direction: row-reverse;
-  gap: 4px;
+  flex-direction: row;
+  gap: 8px;
 }
 
 .rating input {
   display: none;
-}
-
-.rating {
-  display: inline-flex;
-  flex-direction: row;
-  gap: 8px;
 }
 
 .rating label {
@@ -345,9 +342,7 @@ body {
   color: #7a7a7a;
 }
 
-.rating input:checked ~ label,
-.rating label:hover,
-.rating label:hover ~ label {
+.rating input:checked + label {
   color: #000000;
 }
 
