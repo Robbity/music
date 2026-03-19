@@ -237,6 +237,13 @@ body {
   text-align: left;
 }
 
+.settings__danger {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid #000000;
+  text-align: left;
+}
+
 .auth__logo {
   position: absolute;
   top: 24px;

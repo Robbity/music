@@ -1,0 +1,41 @@
+<section class="auth">
+  <%= link_to "Shuffle", root_path, class: "auth__logo" %>
+  <div class="auth__card">
+    <%= link_to "← Back", root_path, class: "auth__back" %>
+    <h1>Settings</h1>
+
+    <%= form_with model: current_user, url: user_registration_path, method: :patch do |form| %>
+      <div class="auth__field">
+        <%= form.label :username, "Username" %><br>
+        <%= form.text_field :username, required: true, autocomplete: "username" %>
+      </div>
+
+      <div class="auth__field">
+        <%= form.label :email, "Email" %><br>
+        <%= form.email_field :email, required: true, autocomplete: "email" %>
+      </div>
+
+      <div class="auth__field">
+        <%= form.label :password, "New password" %><br>
+        <%= form.password_field :password, autocomplete: "new-password" %>
+      </div>
+
+      <div class="auth__field">
+        <%= form.label :password_confirmation, "Confirm new password" %><br>
+        <%= form.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+      <div class="auth__field">
+        <%= form.label :current_password, "Current password" %><br>
+        <%= form.password_field :current_password, required: true, autocomplete: "current-password" %>
+      </div>
+
+      <%= form.submit "Save changes", class: "button" %>
+    <% end %>
+
+    <div class="settings__danger">
+      <h2>Danger zone</h2>
+      <%= button_to "Delete account", user_registration_path, method: :delete, class: "button button--ghost", data: { turbo_confirm: "Delete your account? This cannot be undone." } %>
+    </div>
+  </div>
+</section>
