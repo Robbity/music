@@ -2,6 +2,9 @@ class ListenController < ApplicationController
   def index
     @song = song_of_the_day
     @song&.increment!(:plays_count)
+    if user_signed_in? && params[:prompt_rating_id].present?
+      @prompt_rating = current_user.ratings.find_by(id: params[:prompt_rating_id])
+    end
   end
 
   private

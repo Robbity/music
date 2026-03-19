@@ -25,7 +25,7 @@ class RatingsController < ApplicationController
             locals: { rating: rating }
           )
         end
-        format.html { redirect_to listen_index_path }
+        format.html { redirect_to listen_index_path(prompt_rating_id: rating.id) }
       else
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
