@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   root "listen#index"
 
   resources :listen, only: %i[index]
-  resources :ratings, only: %i[create destroy]
+  resources :ratings, only: %i[create update destroy]
   resources :songs, only: %i[new create index destroy]
   resources :library, only: %i[index]
 end

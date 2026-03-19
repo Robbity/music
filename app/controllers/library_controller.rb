@@ -2,7 +2,7 @@ class LibraryController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @ratings = current_user.ratings
+    @ratings = current_user.ratings.where(saved_to_library: true)
       .includes(song: [ :user, { artwork_attachment: :blob }, { audio_file_attachment: :blob } ])
 
     @ratings = case params[:sort]

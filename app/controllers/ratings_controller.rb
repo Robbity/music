@@ -14,14 +14,15 @@ class RatingsController < ApplicationController
       return
     end
 
-    rating = current_user.ratings.new(song: song, stars: params[:rating][:stars])
+    rating = current_user.ratings.new(song: song, stars: params[:rating][:stars], saved_to_library: false)
 
     respond_to do |format|
       if rating.save
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
             "listen-actions",
-            partial: "listen/library_prompt"
+            partial: "listen/library_prompt",
+            locals: { rating: rating }
           )
         end
         format.html { redirect_to listen_index_path }
@@ -36,6 +37,12 @@ class RatingsController < ApplicationController
         format.html { redirect_to listen_index_path }
       end
     end
+  end
+
+  def update
+    rating = current_user.ratings.find(params[:id])
+    rating.update!(saved_to_library: true)
+    redirect_to listen_index_path
   end
 
   def destroy
