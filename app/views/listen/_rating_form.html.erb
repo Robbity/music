@@ -7,7 +7,7 @@
     </ul>
   <% end %>
 
-  <%= form_with url: ratings_path, scope: :rating do |form| %>
+  <%= form_with url: ratings_path, scope: :rating, data: { turbo_stream: true } do |form| %>
     <%= form.hidden_field :song_id, value: song.id %>
 
     <fieldset class="rating" data-listen-target="stars">
