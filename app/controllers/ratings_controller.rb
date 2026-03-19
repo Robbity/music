@@ -16,10 +16,25 @@ class RatingsController < ApplicationController
 
     rating = current_user.ratings.new(song: song, stars: params[:rating][:stars])
 
-    if rating.save
-      redirect_to listen_index_path, notice: "Thanks for rating."
-    else
-      redirect_to listen_index_path, alert: rating.errors.full_messages.to_sentence
+    respond_to do |format|
+      if rating.save
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "listen-actions",
+            partial: "listen/library_prompt"
+          )
+        end
+        format.html { redirect_to listen_index_path }
+      else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "listen-actions",
+            partial: "listen/rating_form",
+            locals: { song: song, errors: rating.errors }
+          )
+        end
+        format.html { redirect_to listen_index_path }
+      end
     end
   end
 

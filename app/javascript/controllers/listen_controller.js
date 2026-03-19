@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["rating", "stars", "submit", "play", "volume", "post"]
+  static targets = ["rating", "stars", "submit", "play"]
   static values = {
     url: String,
     title: String,
@@ -14,9 +14,6 @@ export default class extends Controller {
     this.loaded = false
     if (this.hasRatingTarget) {
       this.disableRating()
-    }
-    if (this.hasPostTarget) {
-      this.postTarget.classList.add("hidden")
     }
     if (this.hasPlayTarget) {
       this.playTarget.textContent = "Play"
@@ -50,18 +47,13 @@ export default class extends Controller {
     window.dispatchEvent(new CustomEvent("player:toggle"))
   }
 
-  setVolume() {
-    window.dispatchEvent(new CustomEvent("player:volume", { detail: { value: this.volumeTarget.value } }))
-  }
-
   enableRating() {
     this.canRate = true
-    this.postTarget.classList.remove("hidden")
+    this.ratingTarget.classList.remove("hidden")
   }
 
   showRating() {
     if (!this.canRate) return
-    this.ratingTarget.classList.remove("hidden")
     this.enableInputs()
   }
 

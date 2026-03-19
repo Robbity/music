@@ -227,6 +227,7 @@ body {
   text-align: center;
   max-width: 520px;
   width: 100%;
+  position: relative;
 }
 
 .auth__field {
@@ -234,6 +235,24 @@ body {
   gap: 8px;
   margin-bottom: 16px;
   text-align: left;
+}
+
+.auth__logo {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  text-decoration: none;
+  color: #000000;
+  font-weight: 600;
+}
+
+.auth__back {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  text-decoration: none;
+  color: #000000;
+  font-size: 14px;
 }
 
 .auth input {
@@ -289,6 +308,18 @@ body {
   gap: 12px;
 }
 
+.listen__card {
+  border: 2px solid #000000;
+  padding: 32px;
+  display: grid;
+  gap: 20px;
+}
+
+.listen__prompt {
+  display: grid;
+  gap: 12px;
+}
+
 .rating {
   border: none;
   padding: 0;
@@ -300,6 +331,12 @@ body {
 
 .rating input {
   display: none;
+}
+
+.rating {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
 }
 
 .rating label {

@@ -1,5 +1,7 @@
 <section class="auth">
+  <%= link_to "Shuffle", root_path, class: "auth__logo" %>
   <div class="auth__card">
+    <%= link_to "← Back", root_path, class: "auth__back" %>
     <h1>Create account</h1>
 
     <% if resource.errors.any? %>
