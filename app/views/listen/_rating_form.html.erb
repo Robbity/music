@@ -12,7 +12,7 @@
 
     <fieldset class="rating" data-listen-target="stars">
       <legend>Rate this song</legend>
-      <% 1.upto(5) do |star| %>
+      <% 5.downto(1) do |star| %>
         <%= form.radio_button :stars, star, id: "rating_#{star}" %>
         <%= form.label :stars, "★", for: "rating_#{star}" %>
       <% end %>
