@@ -69,7 +69,11 @@
       </div>
 
       <div id="listen-actions">
-        <%= render "rating_form", song: @song, errors: nil %>
+        <% if defined?(@prompt_rating) && @prompt_rating.present? %>
+          <%= render "library_prompt", rating: @prompt_rating %>
+        <% else %>
+          <%= render "rating_form", song: @song, errors: nil %>
+        <% end %>
       </div>
     </div>
   <% else %>
