@@ -50,6 +50,7 @@ export default class extends Controller {
   enableRating() {
     this.canRate = true
     this.ratingTarget.classList.remove("hidden")
+    this.enableInputs()
   }
 
   showRating() {
