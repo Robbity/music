@@ -9,9 +9,17 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
+@import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
+
+@font-face {
+  font-family: "UCity";
+  src: url("/assets/UCity.woff") format("woff");
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Questrial", "UCity", "Georgia", "Times New Roman", serif;
   color: #231f1c;
   background-color: #f8f4ef;
 }
