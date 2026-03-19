@@ -2,10 +2,21 @@ class SongsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @songs = current_user.songs
+    base = current_user.songs
       .with_attached_artwork
+      .with_attached_audio_file
       .includes(:ratings)
-      .order(created_at: :desc)
+
+    @songs = case params[:sort]
+    when "plays"
+               base.order(plays_count: :desc)
+    when "rating"
+               base.left_joins(:ratings)
+                   .group(:id)
+                   .order(Arel.sql("AVG(ratings.stars) DESC NULLS LAST"))
+    else
+               base.order(created_at: :desc)
+    end
   end
 
   def new

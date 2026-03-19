@@ -1,4 +1,14 @@
-<h1>Your uploads</h1>
+<div class="library__header">
+  <h1>Uploads</h1>
+  <form method="get" class="library__sort">
+    <label for="upload_sort">Sort by</label>
+    <select id="upload_sort" name="sort" onchange="this.form.submit()">
+      <option value="recent" <%= "selected" if params[:sort] == "recent" || params[:sort].blank? %>>Newest</option>
+      <option value="plays" <%= "selected" if params[:sort] == "plays" %>>Plays</option>
+      <option value="rating" <%= "selected" if params[:sort] == "rating" %>>Average rating</option>
+    </select>
+  </form>
+</div>
 
 <% if @songs.any? %>
   <ul class="library">
@@ -12,10 +22,14 @@
           <% else %>
             <div class="library__placeholder">No artwork</div>
           <% end %>
+          <button class="library__overlay" type="button" data-action="player#playFromCard" data-player-url="<%= url_for(song.audio_file) %>" data-player-title="<%= song.title %>" data-player-artist="<%= song.user.username %>" data-player-artwork="<%= song.artwork.attached? ? url_for(song.artwork) : "" %>">▶</button>
         </div>
         <div>
           <strong><%= song.title %></strong>
           <div>by <%= song.user.username %></div>
+          <div>
+            Plays: <%= song.plays_count || 0 %>
+          </div>
           <div>
             <% if average.present? %>
               Average rating: <%= average.round(1) %> / 5
@@ -25,9 +39,21 @@
             (<%= rating_count %> ratings)
           </div>
         </div>
+        <div class="library__actions">
+          <details>
+            <summary>•••</summary>
+            <div class="menu">
+              <button type="button" class="menu__item" data-confirm="delete">Delete</button>
+            </div>
+          </details>
+        </div>
       </li>
     <% end %>
   </ul>
 <% else %>
   <p>No songs yet.</p>
 <% end %>
+
+<div class="library__footer">
+  <%= link_to "+ Add track", new_song_path, class: "button" %>
+</div>
