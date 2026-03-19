@@ -155,6 +155,93 @@ body {
   text-align: left;
 }
 
+.guest__song {
+  margin: 24px auto 0;
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.guest__artwork {
+  width: 220px;
+  height: 220px;
+  border: 2px solid #000000;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guest__artwork img,
+.guest__placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+}
+
+.guest__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: rgba(255, 255, 255, 0.8);
+  color: #000000;
+  font-size: 18px;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.guest__artwork:hover .guest__overlay {
+  opacity: 1;
+}
+
+.guest__artwork:hover img {
+  filter: blur(2px);
+}
+
+.guest__meta {
+  text-align: center;
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 24px;
+}
+
+.auth__card {
+  border: 2px solid #000000;
+  padding: 48px;
+  text-align: center;
+  max-width: 520px;
+  width: 100%;
+}
+
+.auth__field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.auth input {
+  padding: 10px 12px;
+  border: 1px solid #000000;
+  font-size: 16px;
+}
+
 .listen {
   display: grid;
   gap: 24px;

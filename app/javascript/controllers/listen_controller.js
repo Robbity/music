@@ -44,6 +44,7 @@ export default class extends Controller {
     if (!this.loaded) {
       this.loadPlayer()
       this.loaded = true
+      return
     }
 
     window.dispatchEvent(new CustomEvent("player:toggle"))
