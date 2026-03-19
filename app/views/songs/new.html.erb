@@ -1,32 +1,30 @@
-<h1>Upload a song</h1>
+<section class="upload">
+  <h1>Upload new song</h1>
 
-<% if @song.errors.any? %>
-  <ul>
-    <% @song.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <% if @song.errors.any? %>
+    <ul>
+      <% @song.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
-<%= form_with model: @song do |form| %>
-  <div>
-    <%= form.label :title, "Title" %><br>
-    <%= form.text_field :title, required: true %>
-  </div>
+  <%= form_with model: @song do |form| %>
+    <div class="upload__art">
+      <%= form.label :artwork, "Artwork (optional)" %><br>
+      <%= form.file_field :artwork, accept: "image/jpeg,image/png" %>
+    </div>
 
-  <div>
-    <%= form.label :audio_file, "Audio file" %><br>
-    <%= form.file_field :audio_file, required: true, direct_upload: true, accept: "audio/mpeg,audio/mp3,audio/wav" %>
-  </div>
+    <div class="upload__field">
+      <%= form.label :title, "Name" %><br>
+      <%= form.text_field :title, required: true %>
+    </div>
 
-  <div>
-    <%= form.label :artwork, "Artwork (optional)" %><br>
-    <%= form.file_field :artwork, accept: "image/jpeg,image/png" %>
-  </div>
+    <div class="upload__field">
+      <%= form.label :audio_file, "Audio file" %><br>
+      <%= form.file_field :audio_file, required: true, direct_upload: true, accept: "audio/mpeg,audio/mp3,audio/wav,audio/x-wav,audio/wave,audio/vnd.wave" %>
+    </div>
 
-  <%= form.submit "Upload" %>
-<% end %>
-
-<p>
-  <%= link_to "View your uploads", songs_path %>
-</p>
+    <%= form.submit "Upload", class: "button" %>
+  <% end %>
+</section>

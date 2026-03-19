@@ -1,7 +1,10 @@
 class ListenController < ApplicationController
-  before_action :authenticate_user!
-
   def index
+    unless user_signed_in?
+      render :guest
+      return
+    end
+
     @song = next_song_for(current_user)
     @song&.increment!(:plays_count)
   end

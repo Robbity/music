@@ -6,6 +6,9 @@ export default class extends Controller {
   toggle(event) {
     event.preventDefault()
     const expanded = this.menuTarget.classList.toggle("is-open")
-    this.element.querySelector(".navbar__toggle").setAttribute("aria-expanded", expanded)
+    const toggle = this.element.querySelector(".navbar__toggle")
+    if (toggle) {
+      toggle.setAttribute("aria-expanded", expanded)
+    }
   }
 }

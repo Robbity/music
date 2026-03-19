@@ -1,4 +1,13 @@
-<h1>Listened</h1>
+<div class="library__header">
+  <h1>Library</h1>
+  <form method="get" class="library__sort">
+    <label for="library_sort">Sort by</label>
+    <select id="library_sort" name="sort" onchange="this.form.submit()">
+      <option value="date" <%= "selected" if params[:sort] == "date" || params[:sort].blank? %>>Date listened</option>
+      <option value="rating" <%= "selected" if params[:sort] == "rating" %>>Rating</option>
+    </select>
+  </form>
+</div>
 
 <% if @ratings.any? %>
   <ul class="library">
@@ -10,13 +19,24 @@
           <% else %>
             <div class="library__placeholder">No artwork</div>
           <% end %>
+          <button class="library__overlay" type="button" data-action="player#playFromCard" data-player-url="<%= url_for(rating.song.audio_file) %>" data-player-title="<%= rating.song.title %>" data-player-artist="<%= rating.song.user.username %>" data-player-artwork="<%= rating.song.artwork.attached? ? url_for(rating.song.artwork) : "" %>">▶</button>
         </div>
         <div>
           <strong><%= rating.song.title %></strong>
           <div>by <%= rating.song.user.username %></div>
           <div class="library__rating">
-            Rating: <%= "★" * rating.stars %><%= "☆" * (5 - rating.stars) %>
+            <span>Rating: <%= "★" * rating.stars %><%= "☆" * (5 - rating.stars) %></span>
+            <span class="library__date"><%= rating.created_at.strftime("%b %d, %Y") %></span>
           </div>
+        </div>
+        <div class="library__actions">
+          <details>
+            <summary>•••</summary>
+            <div class="menu">
+              <button type="button" class="menu__item">Download</button>
+              <button type="button" class="menu__item" data-confirm="remove">Remove</button>
+            </div>
+          </details>
         </div>
       </li>
     <% end %>
