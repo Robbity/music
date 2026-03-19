@@ -11,6 +11,7 @@ export default class extends Controller {
     this.audioTarget.addEventListener("loadedmetadata", () => this.syncScrubRange())
     this.audioTarget.addEventListener("ended", () => {
       this.updateToggleLabel()
+      this.containerTarget.classList.add("hidden")
       window.dispatchEvent(new CustomEvent("player:ended"))
       window.dispatchEvent(new CustomEvent("player:state", { detail: { playing: false } }))
     })
