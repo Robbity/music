@@ -16,11 +16,11 @@
       <% average = song.ratings.average(:stars) %>
       <% rating_count = song.ratings.size %>
       <li class="library__item">
-        <div class="library__artwork">
+        <div class="library__artwork" style="background-color: <%= song.artwork_color %>">
           <% if song.artwork.attached? %>
             <%= image_tag song.artwork, alt: "Artwork for #{song.title}" %>
           <% else %>
-            <div class="library__placeholder">No artwork</div>
+            <div class="library__placeholder"></div>
           <% end %>
           <button class="library__overlay" type="button" data-action="player#playFromCard" data-player-url="<%= url_for(song.audio_file) %>" data-player-title="<%= song.title %>" data-player-artist="<%= song.user.username %>" data-player-artwork="<%= song.artwork.attached? ? url_for(song.artwork) : "" %>">▶</button>
         </div>
@@ -43,7 +43,7 @@
           <details>
             <summary>•••</summary>
             <div class="menu">
-              <button type="button" class="menu__item" data-confirm="delete">Delete</button>
+              <%= button_to "Delete", song_path(song), method: :delete, class: "menu__item", data: { turbo_confirm: "Delete this song?" } %>
             </div>
           </details>
         </div>

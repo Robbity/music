@@ -22,4 +22,10 @@ class RatingsController < ApplicationController
       redirect_to listen_index_path, alert: rating.errors.full_messages.to_sentence
     end
   end
+
+  def destroy
+    rating = current_user.ratings.find(params[:id])
+    rating.destroy
+    redirect_to library_index_path, notice: "Removed from your library."
+  end
 end

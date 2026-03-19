@@ -7,11 +7,11 @@
 
         <% if @song.present? %>
           <div class="guest__song">
-            <div class="guest__artwork">
+            <div class="guest__artwork" style="background-color: <%= @song.artwork_color %>">
               <% if @song.artwork.attached? %>
                 <%= image_tag @song.artwork, alt: "Artwork for #{@song.title}" %>
               <% else %>
-                <div class="guest__placeholder">No artwork</div>
+                <div class="guest__placeholder"></div>
               <% end %>
               <button
                 class="guest__overlay"
@@ -40,11 +40,11 @@
       </div>
     </section>
   <% elsif @song.present? %>
-    <div class="listen__artwork">
+    <div class="listen__artwork" style="background-color: <%= @song.artwork_color %>">
       <% if @song.artwork.attached? %>
         <%= image_tag @song.artwork, alt: "Artwork for #{@song.title}", class: "listen__image" %>
       <% else %>
-        <div class="listen__placeholder">No artwork</div>
+        <div class="listen__placeholder"></div>
       <% end %>
     </div>
 
