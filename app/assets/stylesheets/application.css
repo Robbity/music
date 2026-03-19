@@ -237,6 +237,11 @@ body {
   text-align: left;
 }
 
+.field-error {
+  color: #b00020;
+  font-size: 14px;
+}
+
 .settings__danger {
   margin-top: 32px;
   padding-top: 16px;
