@@ -4,8 +4,8 @@
 
     <%= form_with scope: resource_name, url: session_path(resource_name) do |form| %>
       <div class="auth__field">
-        <%= form.label :email, "Email" %><br>
-        <%= form.email_field :email, required: true, autofocus: true, autocomplete: "username" %>
+        <%= form.label :email, "Email or username" %><br>
+        <%= form.text_field :email, required: true, autofocus: true, autocomplete: "username" %>
       </div>
 
       <div class="auth__field">
