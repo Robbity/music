@@ -179,7 +179,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background: #ffffff;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -363,7 +363,7 @@ body {
   height: 100%;
   border-radius: 12px;
   object-fit: cover;
-  background: #ffffff;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -438,6 +438,10 @@ body {
 
 .library__footer {
   margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  bottom: 88px;
 }
 
 .player {

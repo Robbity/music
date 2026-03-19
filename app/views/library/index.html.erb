@@ -13,11 +13,11 @@
   <ul class="library">
     <% @ratings.each do |rating| %>
       <li class="library__item">
-        <div class="library__artwork">
+        <div class="library__artwork" style="background-color: <%= rating.song.artwork_color %>">
           <% if rating.song.artwork.attached? %>
             <%= image_tag rating.song.artwork, alt: "Artwork for #{rating.song.title}" %>
           <% else %>
-            <div class="library__placeholder">No artwork</div>
+            <div class="library__placeholder"></div>
           <% end %>
           <button class="library__overlay" type="button" data-action="player#playFromCard" data-player-url="<%= url_for(rating.song.audio_file) %>" data-player-title="<%= rating.song.title %>" data-player-artist="<%= rating.song.user.username %>" data-player-artwork="<%= rating.song.artwork.attached? ? url_for(rating.song.artwork) : "" %>">▶</button>
         </div>
@@ -33,8 +33,8 @@
           <details>
             <summary>•••</summary>
             <div class="menu">
-              <button type="button" class="menu__item">Download</button>
-              <button type="button" class="menu__item" data-confirm="remove">Remove</button>
+              <%= link_to "Download", rails_blob_path(rating.song.audio_file, disposition: "attachment"), class: "menu__item" %>
+              <%= button_to "Remove", rating_path(rating), method: :delete, class: "menu__item", data: { turbo_confirm: "Remove this song from your library?" } %>
             </div>
           </details>
         </div>
