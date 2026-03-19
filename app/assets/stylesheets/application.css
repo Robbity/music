@@ -405,15 +405,16 @@ body {
   color: #000000;
 }
 
-.library__overlay {
+.library__overlay,
+.guest__overlay {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000000;
+  color: #ffffff;
   font-size: 18px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.35);
   opacity: 0;
   transition: opacity 0.2s ease;
   border: none;
@@ -422,12 +423,80 @@ body {
   cursor: pointer;
 }
 
-.library__artwork:hover .library__overlay {
+.library__artwork:hover .library__overlay,
+.guest__artwork:hover .guest__overlay {
   opacity: 1;
 }
 
-.library__artwork:hover img {
-  filter: blur(2px);
+.library__overlay[data-playing="true"],
+.guest__overlay[data-playing="true"] {
+  opacity: 1;
+}
+
+.library__artwork:hover img,
+.guest__artwork:hover img {
+  filter: blur(4px);
+}
+
+.overlay__icon {
+  font-size: 20px;
+}
+
+.overlay__icon--pause {
+  display: none;
+}
+
+.overlay__bars {
+  display: none;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.overlay__bars span {
+  width: 3px;
+  height: 16px;
+  background: #ffffff;
+  animation: bar 0.9s infinite ease-in-out;
+}
+
+.overlay__bars span:nth-child(2) {
+  height: 22px;
+  animation-delay: 0.15s;
+}
+
+.overlay__bars span:nth-child(3) {
+  height: 12px;
+  animation-delay: 0.3s;
+}
+
+.library__overlay[data-playing="true"] .overlay__bars,
+.guest__overlay[data-playing="true"] .overlay__bars {
+  display: inline-flex;
+}
+
+.library__overlay[data-playing="true"] .overlay__icon--play,
+.guest__overlay[data-playing="true"] .overlay__icon--play {
+  display: none;
+}
+
+.library__overlay[data-playing="true"]:hover .overlay__bars,
+.guest__overlay[data-playing="true"]:hover .overlay__bars {
+  display: none;
+}
+
+.library__overlay[data-playing="true"]:hover .overlay__icon--pause,
+.guest__overlay[data-playing="true"]:hover .overlay__icon--pause {
+  display: inline-block;
+}
+
+@keyframes bar {
+  0%,
+  100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1);
+  }
 }
 
 .library__rating {

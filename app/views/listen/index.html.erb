@@ -22,7 +22,15 @@
                 data-player-artist="<%= @song.user.username %>"
                 data-player-artwork="<%= @song.artwork.attached? ? url_for(@song.artwork) : "" %>"
                 data-player-locked="true"
-              >▶</button>
+              >
+                <span class="overlay__icon overlay__icon--play">▶</span>
+                <span class="overlay__icon overlay__icon--pause">❚❚</span>
+                <span class="overlay__bars">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+              </button>
             </div>
             <div class="guest__meta">
               <strong><%= @song.title %></strong>

@@ -13,6 +13,7 @@ export default class extends Controller {
     this.audioTarget.addEventListener("ended", () => {
       this.updateToggleLabel()
       this.containerTarget.classList.add("hidden")
+      this.updateOverlayState(false)
       window.dispatchEvent(new CustomEvent("player:ended"))
       window.dispatchEvent(new CustomEvent("player:state", { detail: { playing: false } }))
     })
@@ -81,6 +82,7 @@ export default class extends Controller {
     }
 
     this.updateToggleLabel()
+    this.updateOverlayState(!this.audioTarget.paused)
     window.dispatchEvent(new CustomEvent("player:state", { detail: { playing: !this.audioTarget.paused } }))
   }
 
@@ -93,6 +95,7 @@ export default class extends Controller {
       this.containerTarget.classList.add("hidden")
     }
     this.updateToggleLabel()
+    this.updateOverlayState(!this.audioTarget.paused)
     window.dispatchEvent(new CustomEvent("player:state", { detail: { playing: !this.audioTarget.paused } }))
   }
 
@@ -122,5 +125,16 @@ export default class extends Controller {
   updateToggleLabel() {
     if (!this.hasToggleTarget) return
     this.toggleTarget.textContent = this.audioTarget.paused ? "Play" : "Pause"
+  }
+
+  updateOverlayState(isPlaying) {
+    const buttons = document.querySelectorAll("[data-player-url]")
+    buttons.forEach((button) => {
+      if (button.dataset.playerUrl === this.currentUrl) {
+        button.dataset.playing = isPlaying ? "true" : "false"
+      } else {
+        button.dataset.playing = "false"
+      }
+    })
   }
 }
