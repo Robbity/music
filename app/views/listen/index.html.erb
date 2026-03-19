@@ -1,4 +1,4 @@
-<div class="listen" data-controller="listen">
+<div class="listen" data-controller="listen" data-listen-url-value="<%= @song ? url_for(@song.audio_file) : "" %>" data-listen-title-value="<%= @song&.title %>" data-listen-artist-value="<%= @song&.user&.username %>" data-listen-artwork-value="<%= @song&.artwork&.attached? ? url_for(@song.artwork) : "" %>">
   <% if @song.present? %>
     <div class="listen__artwork">
       <% if @song.artwork.attached? %>
@@ -14,31 +14,38 @@
     </div>
 
     <div class="listen__player">
-      <audio controls data-listen-target="audio" data-action="ended->listen#enableRating">
-        <source src="<%= url_for(@song.audio_file) %>">
-        Your browser does not support the audio element.
-      </audio>
+      <div class="listen__controls">
+        <button class="button" type="button" data-action="listen#togglePlayback" data-listen-target="play">Play</button>
+        <input class="listen__volume" type="range" min="0" max="1" step="0.01" value="1" data-action="input->listen#setVolume" data-listen-target="volume">
+      </div>
     </div>
 
-    <div class="listen__rating hidden" data-listen-target="rating">
-      <%= form_with url: ratings_path, scope: :rating do |form| %>
-        <%= form.hidden_field :song_id, value: @song.id %>
+    <div class="listen__post hidden" data-listen-target="post">
+      <div class="listen__post-actions">
+        <button class="button" type="button" data-action="listen#showRating">Rating</button>
+        <button class="button button--ghost" type="button" data-action="listen#showRating">Add to library?</button>
+      </div>
 
-        <fieldset class="rating" data-listen-target="stars">
-          <legend>Rate this song</legend>
-          <% 5.downto(1) do |star| %>
-            <%= form.radio_button :stars, star, id: "rating_#{star}" %>
-            <%= form.label :stars, "#{"★" * star}", for: "rating_#{star}" %>
-          <% end %>
-        </fieldset>
+      <div class="listen__rating hidden" data-listen-target="rating">
+        <%= form_with url: ratings_path, scope: :rating do |form| %>
+          <%= form.hidden_field :song_id, value: @song.id %>
 
-        <%= form.submit "Submit rating", data: { listen_target: "submit" } %>
-      <% end %>
+          <fieldset class="rating" data-listen-target="stars">
+            <legend>Rate this song</legend>
+            <% 5.downto(1) do |star| %>
+              <%= form.radio_button :stars, star, id: "rating_#{star}" %>
+              <%= form.label :stars, "#{"★" * star}", for: "rating_#{star}" %>
+            <% end %>
+          </fieldset>
+
+          <%= form.submit "Submit rating", data: { listen_target: "submit" } %>
+        <% end %>
+      </div>
     </div>
   <% else %>
     <div class="listen__empty">
       <h1>No songs available right now — upload one to get started</h1>
-      <%= link_to "Upload a song", new_song_path %>
+      <%= link_to "Upload a song", new_song_path, class: "button" %>
     </div>
   <% end %>
 </div>
