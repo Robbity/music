@@ -53,10 +53,8 @@
       <%= yield %>
     </main>
 
-    <% if user_signed_in? %>
-      <div class="player hidden" data-player-target="container">
-        <audio data-player-target="audio"></audio>
-      </div>
-    <% end %>
+    <div class="player hidden" data-player-target="container">
+      <audio data-player-target="audio"></audio>
+    </div>
   </body>
 </html>
