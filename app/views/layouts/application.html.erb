@@ -42,6 +42,7 @@
           <details class="navbar__dropdown">
             <summary class="navbar__link">☰</summary>
             <div class="menu">
+              <%= link_to "Settings", settings_path, class: "menu__item" %>
               <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "menu__item" %>
             </div>
           </details>

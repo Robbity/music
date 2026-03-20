@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   resources :ratings, only: %i[create update destroy]
   resources :songs, only: %i[new create index destroy]
   resources :library, only: %i[index]
+  resource :settings, only: %i[show]
 end

@@ -6,8 +6,6 @@ class User < ApplicationRecord
   normalizes :email, with: ->(e) { e.strip.downcase }
 
   validates :username, presence: true, uniqueness: true
-  attr_readonly :username
-
   has_many :songs, dependent: :destroy
   has_many :ratings, dependent: :destroy
 
