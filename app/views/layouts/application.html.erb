@@ -48,8 +48,8 @@
           <%= link_to "Settings", settings_path, class: "navbar__link" %>
           <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "navbar__action" %>
         </nav>
+        <div class="navbar__overlay" data-navbar-target="overlay" aria-hidden="true" data-action="click->navbar#close"></div>
       </header>
-      <div class="navbar__overlay" data-navbar-target="overlay" aria-hidden="true" data-action="click->navbar#close"></div>
     <% end %>
 
     <main class="page">
