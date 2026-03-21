@@ -22,7 +22,7 @@
           <% else %>
             <div class="library__placeholder"></div>
           <% end %>
-          <button class="library__overlay" type="button" data-action="player#playFromCard" data-player-url="<%= url_for(song.audio_file) %>" data-player-title="<%= song.title %>" data-player-artist="<%= song.user.username %>" data-player-artwork="<%= song.artwork.attached? ? url_for(song.artwork) : "" %>">
+          <button class="library__overlay" type="button" data-action="player#playFromCard" data-player-url="<%= url_for(song.audio_file) %>" data-player-title="<%= song.title %>" data-player-artist="<%= song.user.username %>" data-player-artwork="<%= song.artwork.attached? ? url_for(song.artwork) : "" %>" data-player-id="<%= song.id %>">
             <span class="overlay__icon overlay__icon--play">▶</span>
             <span class="overlay__icon overlay__icon--pause">❚❚</span>
             <span class="overlay__bars">

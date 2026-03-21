@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
   before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: :play
 
   def index
     base = current_user.songs
@@ -37,6 +38,12 @@ class SongsController < ApplicationController
     song = current_user.songs.find(params[:id])
     song.destroy
     redirect_to songs_path, notice: "Song deleted."
+  end
+
+  def play
+    song = Song.find(params[:id])
+    song.increment!(:plays_count)
+    head :ok
   end
 
   private

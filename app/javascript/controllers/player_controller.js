@@ -66,11 +66,12 @@ export default class extends Controller {
     })
   }
 
-  load({ url, title, artist, artwork, locked, autoplay }) {
+  load({ url, title, artist, artwork, locked, autoplay, id }) {
     if (!url) return
 
     this.audioTarget.src = url
     this.currentUrl = url
+    this.trackPlay(id)
     if (this.hasTitleTarget) {
       this.titleTarget.textContent = title || "Untitled"
     }
@@ -133,6 +134,19 @@ export default class extends Controller {
     const parsedValue = parseFloat(value)
     this.audioTarget.volume = parsedValue
     window.localStorage.setItem("player:volume", parsedValue)
+  }
+
+  trackPlay(id) {
+    if (!id) return
+    const token = document.querySelector("meta[name='csrf-token']")?.content
+    fetch(`/songs/${id}/play`, {
+      method: "POST",
+      headers: {
+        "X-CSRF-Token": token,
+        Accept: "application/json"
+      },
+      credentials: "same-origin"
+    })
   }
 
   syncScrubRange() {

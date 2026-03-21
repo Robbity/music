@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
   resources :listen, only: %i[index]
   resources :ratings, only: %i[create update destroy]
-  resources :songs, only: %i[new create index destroy]
+  resources :songs, only: %i[new create index destroy] do
+    post :play, on: :member
+  end
   resources :library, only: %i[index]
   resource :settings, only: %i[show]
 end

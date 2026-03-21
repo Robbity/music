@@ -1,4 +1,4 @@
-<div class="listen" data-controller="listen" data-listen-url-value="<%= @song ? url_for(@song.audio_file) : "" %>" data-listen-title-value="<%= @song&.title %>" data-listen-artist-value="<%= @song&.user&.username %>" data-listen-artwork-value="<%= @song&.artwork&.attached? ? url_for(@song.artwork) : "" %>">
+<div class="listen" data-controller="listen" data-listen-url-value="<%= @song ? url_for(@song.audio_file) : "" %>" data-listen-title-value="<%= @song&.title %>" data-listen-artist-value="<%= @song&.user&.username %>" data-listen-artwork-value="<%= @song&.artwork&.attached? ? url_for(@song.artwork) : "" %>" data-listen-id-value="<%= @song&.id %>">
   <% if !user_signed_in? %>
     <section class="guest">
       <div class="guest__card">
@@ -21,6 +21,7 @@
                 data-player-title="<%= @song.title %>"
                 data-player-artist="<%= @song.user.username %>"
                 data-player-artwork="<%= @song.artwork.attached? ? url_for(@song.artwork) : "" %>"
+                data-player-id="<%= @song.id %>"
                 data-player-locked="true"
               >
                 <span class="overlay__icon overlay__icon--play">▶</span>

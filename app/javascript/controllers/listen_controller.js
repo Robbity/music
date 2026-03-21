@@ -6,7 +6,8 @@ export default class extends Controller {
     url: String,
     title: String,
     artist: String,
-    artwork: String
+    artwork: String,
+    id: String
   }
 
   connect() {
@@ -78,14 +79,22 @@ export default class extends Controller {
   }
 
   loadPlayer() {
+    const detail = {
+      url: this.urlValue,
+      title: this.titleValue,
+      artist: this.artistValue,
+      artwork: this.artworkValue,
+      locked: true
+    }
+
+    if (this.hasIdValue) {
+      detail.id = this.idValue
+    }
+
     window.dispatchEvent(
       new CustomEvent("player:load", {
         detail: {
-          url: this.urlValue,
-          title: this.titleValue,
-          artist: this.artistValue,
-          artwork: this.artworkValue,
-          locked: true
+          ...detail
         }
       })
     )
