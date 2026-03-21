@@ -151,15 +151,57 @@ summary:focus-visible {
 }
 
 .navbar__menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 260px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 16px;
+  padding: 80px 24px 24px;
+  background: #ffffff;
+  border-left: 2px solid #000000;
+  box-shadow: -12px 0 24px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.navbar__menu.is-open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .navbar__link {
   text-decoration: none;
   color: #000000;
   font-size: 15px;
+}
+
+.navbar__menu .navbar__link,
+.navbar__menu .navbar__action {
+  font-size: 16px;
+  padding: 6px 0;
+}
+
+.navbar__action {
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: #000000;
+}
+
+.navbar__divider {
+  width: 100%;
+  border-top: 1px solid #000000;
+  margin: 4px 0;
 }
 
 .navbar__button {
@@ -171,7 +213,7 @@ summary:focus-visible {
 }
 
 .navbar__toggle {
-  display: none;
+  display: inline-flex;
   background: none;
   border: none;
   padding: 4px;
@@ -793,36 +835,6 @@ summary:focus-visible {
 @media (max-width: 720px) {
   .navbar {
     flex-wrap: wrap;
-  }
-
-  .navbar__toggle {
-    display: inline-flex;
-  }
-
-  .navbar__menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 260px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 80px 24px 24px;
-    background: #ffffff;
-    border-left: 2px solid #000000;
-    box-shadow: -12px 0 24px rgba(0, 0, 0, 0.1);
-    transform: translateX(100%);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.25s ease, opacity 0.25s ease;
-  }
-
-  .navbar__menu.is-open {
-    transform: translateX(0);
-    opacity: 1;
-    pointer-events: auto;
   }
 
   .page {

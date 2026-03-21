@@ -39,13 +39,9 @@
         <nav id="navbar-menu" class="navbar__menu" data-navbar-target="menu">
           <%= link_to "Library", library_index_path, class: "navbar__link" %>
           <%= link_to "Uploads", songs_path, class: "navbar__link" %>
-          <details class="navbar__dropdown">
-            <summary class="navbar__link">☰</summary>
-            <div class="menu">
-              <%= link_to "Settings", settings_path, class: "menu__item" %>
-              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "menu__item" %>
-            </div>
-          </details>
+          <div class="navbar__divider"></div>
+          <%= link_to "Settings", settings_path, class: "navbar__link" %>
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "navbar__action" %>
         </nav>
       </header>
     <% end %>
