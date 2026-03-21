@@ -30,20 +30,26 @@
           <%= link_to "Shuffle", root_path, class: "navbar__logo" %>
         </div>
 
+        <nav class="navbar__primary" aria-label="Primary">
+          <%= link_to "Library", library_index_path, class: "navbar__link" %>
+          <%= link_to "Uploads", songs_path, class: "navbar__link" %>
+        </nav>
+
         <button class="navbar__toggle" type="button" data-action="navbar#toggle" aria-expanded="false" aria-controls="navbar-menu">
           <span class="navbar__toggle-bar"></span>
           <span class="navbar__toggle-bar"></span>
           <span class="navbar__toggle-bar"></span>
         </button>
 
-        <nav id="navbar-menu" class="navbar__menu" data-navbar-target="menu">
-          <%= link_to "Library", library_index_path, class: "navbar__link" %>
-          <%= link_to "Uploads", songs_path, class: "navbar__link" %>
-          <div class="navbar__divider"></div>
+        <nav id="navbar-menu" class="navbar__menu" data-navbar-target="menu" aria-label="Menu">
+          <%= link_to "Library", library_index_path, class: "navbar__link navbar__link--primary" %>
+          <%= link_to "Uploads", songs_path, class: "navbar__link navbar__link--primary" %>
+          <div class="navbar__divider navbar__divider--primary"></div>
           <%= link_to "Settings", settings_path, class: "navbar__link" %>
           <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "navbar__action" %>
         </nav>
       </header>
+      <div class="navbar__overlay" data-navbar-target="overlay" aria-hidden="true" data-action="click->navbar#close"></div>
     <% end %>
 
     <main class="page">
