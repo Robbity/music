@@ -2,12 +2,25 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["audio", "title", "artist", "artwork", "toggle", "scrub", "volume", "container"]
+  static values = {
+    volume: { type: Number, default: 1 }
+  }
 
   connect() {
     if (!this.hasContainerTarget) return
 
     this.containerTarget.classList.add("hidden")
     this.currentUrl = null
+    if (this.hasVolumeTarget) {
+      const storedVolume = window.localStorage.getItem("player:volume")
+      if (storedVolume !== null) {
+        const parsedVolume = parseFloat(storedVolume)
+        if (!Number.isNaN(parsedVolume)) {
+          this.volumeTarget.value = parsedVolume
+        }
+      }
+      this.audioTarget.volume = parseFloat(this.volumeTarget.value)
+    }
     this.audioTarget.addEventListener("timeupdate", () => this.updateScrub())
     this.audioTarget.addEventListener("loadedmetadata", () => this.syncScrubRange())
     this.audioTarget.addEventListener("ended", () => {
@@ -117,7 +130,9 @@ export default class extends Controller {
 
   setVolume(event) {
     const value = event?.detail?.value ?? event.target.value
-    this.audioTarget.volume = parseFloat(value)
+    const parsedValue = parseFloat(value)
+    this.audioTarget.volume = parsedValue
+    window.localStorage.setItem("player:volume", parsedValue)
   }
 
   syncScrubRange() {

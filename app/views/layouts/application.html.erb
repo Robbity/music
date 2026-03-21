@@ -56,6 +56,20 @@
 
     <div class="player hidden" data-player-target="container">
       <audio data-player-target="audio"></audio>
+      <div class="player__dock" role="group" aria-label="Audio volume">
+        <span class="player__volume-label">Volume</span>
+        <input
+          class="player__volume"
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value="1"
+          data-player-target="volume"
+          data-action="input->player#setVolume"
+          aria-label="Volume"
+        >
+      </div>
     </div>
   </body>
 </html>

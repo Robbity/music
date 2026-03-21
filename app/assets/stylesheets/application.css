@@ -560,13 +560,15 @@ body {
 }
 
 .player {
-  position: sticky;
-  bottom: 0;
-  background: #ffffff;
-  border-top: 2px solid #000000;
-  padding: 12px 24px;
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 20;
   display: grid;
   gap: 12px;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .player__meta {
@@ -592,6 +594,24 @@ body {
   grid-template-columns: auto 1fr auto;
   gap: 12px;
   align-items: center;
+}
+
+.player__dock {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 2px solid #000000;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.player__volume-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .upload {
@@ -660,7 +680,8 @@ body {
 }
 
 .player__volume {
-  width: 120px;
+  width: 140px;
+  accent-color: #000000;
 }
 
 @media (max-width: 720px) {
@@ -695,6 +716,10 @@ body {
   .library__artwork {
     width: 64px;
     height: 64px;
+  }
+
+  .player {
+    display: none;
   }
 }
 .navbar__dropdown {
