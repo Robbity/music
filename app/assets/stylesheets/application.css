@@ -796,15 +796,29 @@ summary:focus-visible {
   }
 
   .navbar__menu {
-    width: 100%;
-    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 260px;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-top: 12px;
+    gap: 16px;
+    padding: 80px 24px 24px;
+    background: #ffffff;
+    border-left: 2px solid #000000;
+    box-shadow: -12px 0 24px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
   }
 
   .navbar__menu.is-open {
-    display: flex;
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .page {
