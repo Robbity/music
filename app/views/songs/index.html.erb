@@ -1,8 +1,8 @@
 <div class="library__header">
   <h1>Uploads</h1>
   <form method="get" class="library__sort">
-    <label for="upload_sort">Sort by</label>
-    <select id="upload_sort" name="sort" onchange="this.form.submit()">
+    <label for="upload_sort" class="library__sort-label">Sort by</label>
+    <select id="upload_sort" name="sort" class="library__sort-select" onchange="this.form.submit()">
       <option value="recent" <%= "selected" if params[:sort] == "recent" || params[:sort].blank? %>>Newest</option>
       <option value="plays" <%= "selected" if params[:sort] == "plays" %>>Plays</option>
       <option value="rating" <%= "selected" if params[:sort] == "rating" %>>Average rating</option>

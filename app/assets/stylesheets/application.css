@@ -385,6 +385,26 @@ summary:focus-visible {
   gap: 8px;
 }
 
+.library__sort-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: #3f3f3f;
+}
+
+.library__sort-select {
+  border: 2px solid #000000;
+  border-radius: 999px;
+  padding: 8px 36px 8px 12px;
+  background: #ffffff;
+  font: inherit;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1L6 6L11 1' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
 .library {
   list-style: none;
   padding: 0;

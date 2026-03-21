@@ -1,8 +1,8 @@
 <div class="library__header">
   <h1>Library</h1>
   <form method="get" class="library__sort">
-    <label for="library_sort">Sort by</label>
-    <select id="library_sort" name="sort" onchange="this.form.submit()">
+    <label for="library_sort" class="library__sort-label">Sort by</label>
+    <select id="library_sort" name="sort" class="library__sort-select" onchange="this.form.submit()">
       <option value="date" <%= "selected" if params[:sort] == "date" || params[:sort].blank? %>>Date listened</option>
       <option value="rating" <%= "selected" if params[:sort] == "rating" %>>Rating</option>
     </select>
