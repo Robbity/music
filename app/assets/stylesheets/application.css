@@ -63,6 +63,10 @@ body {
   z-index: 30;
 }
 
+.modal.hidden {
+  display: none;
+}
+
 .modal__overlay {
   position: absolute;
   inset: 0;
