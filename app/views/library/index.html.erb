@@ -29,11 +29,11 @@
             </span>
           </button>
         </div>
-        <div>
-          <strong><%= rating.song.title %></strong>
-          <div>by <%= rating.song.user.username %></div>
+        <div class="library__info">
+          <div class="library__title"><%= rating.song.title %></div>
+          <div class="library__artist">by <%= rating.song.user.username %></div>
           <div class="library__rating">
-            <span>Rating: <%= "★" * rating.stars %><%= "☆" * (5 - rating.stars) %></span>
+            <span class="library__metric">Rating: <%= "★" * rating.stars %><%= "☆" * (5 - rating.stars) %></span>
             <span class="library__date"><%= rating.created_at.strftime("%b %d, %Y") %></span>
           </div>
         </div>

@@ -405,6 +405,34 @@ summary:focus-visible {
   position: relative;
 }
 
+.library__info {
+  display: grid;
+  gap: 6px;
+}
+
+.library__title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.library__artist {
+  font-size: 14px;
+  color: #3f3f3f;
+}
+
+.library__meta,
+.library__rating {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: #3f3f3f;
+}
+
+.library__metric {
+  font-weight: 500;
+}
+
 .library__artwork {
   width: 96px;
   height: 96px;
@@ -523,10 +551,7 @@ summary:focus-visible {
 }
 
 .library__rating {
-  margin-top: 6px;
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
+  margin-top: 2px;
 }
 
 .library__date {

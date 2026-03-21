@@ -32,19 +32,19 @@
             </span>
           </button>
         </div>
-        <div>
-          <strong><%= song.title %></strong>
-          <div>by <%= song.user.username %></div>
-          <div>
-            Plays: <%= song.plays_count || 0 %>
-          </div>
-          <div>
-            <% if average.present? %>
-              Average rating: <%= average.round(1) %> / 5
-            <% else %>
-              No ratings yet
-            <% end %>
-            (<%= rating_count %> ratings)
+        <div class="library__info">
+          <div class="library__title"><%= song.title %></div>
+          <div class="library__artist">by <%= song.user.username %></div>
+          <div class="library__meta">
+            <span class="library__metric">Plays: <%= song.plays_count || 0 %></span>
+            <span class="library__metric">
+              <% if average.present? %>
+                Average rating: <%= average.round(1) %> / 5
+              <% else %>
+                No ratings yet
+              <% end %>
+            </span>
+            <span class="library__metric">(<%= rating_count %> ratings)</span>
           </div>
         </div>
         <div class="library__actions">
