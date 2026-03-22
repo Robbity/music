@@ -63,16 +63,33 @@
         <p>Uploaded by <strong><%= @song.user.username %></strong></p>
       </div>
 
-      <div class="listen__player">
-        <div class="listen__controls">
-          <button class="button" type="button" data-action="listen#togglePlayback" data-listen-target="play">Play</button>
-          <span class="listen__timer" data-listen-target="timer">0:00 / 0:00</span>
+      <% unless @user_rating&.saved_to_library %>
+        <div class="listen__player">
+          <div class="listen__controls">
+            <button class="button" type="button" data-action="listen#togglePlayback" data-listen-target="play">Play</button>
+            <span class="listen__timer" data-listen-target="timer">0:00 / 0:00</span>
+          </div>
         </div>
-      </div>
+      <% end %>
 
       <div id="listen-actions">
         <% if defined?(@prompt_rating) && @prompt_rating.present? %>
           <%= render "library_prompt", rating: @prompt_rating %>
+        <% elsif @user_rating&.saved_to_library %>
+          <div class="listen__prompt">
+            <p>This song is saved in your library.</p>
+            <div class="listen__post-actions">
+              <%= link_to "Open library", library_index_path, class: "button" %>
+            </div>
+          </div>
+        <% elsif @user_rating.present? %>
+          <div class="listen__prompt">
+            <p>You already rated this song.</p>
+            <div class="listen__post-actions">
+              <%= button_to "Add to library", rating_path(@user_rating), method: :patch, class: "button" %>
+              <%= link_to "Not now", listen_index_path, class: "button button--ghost" %>
+            </div>
+          </div>
         <% else %>
           <%= render "rating_form", song: @song, errors: nil %>
         <% end %>
