@@ -87,7 +87,6 @@
             <p>You already rated this song.</p>
             <div class="listen__post-actions">
               <%= button_to "Add to library", rating_path(@user_rating), method: :patch, class: "button" %>
-              <%= link_to "Not now", listen_index_path, class: "button button--ghost" %>
             </div>
           </div>
         <% else %>
