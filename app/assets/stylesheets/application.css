@@ -260,7 +260,7 @@ summary:focus-visible {
 
 .guest__card {
   border: 2px solid #000000;
-  padding: 48px;
+  padding: 40px;
   text-align: center;
   max-width: 520px;
   width: 100%;
@@ -347,7 +347,7 @@ summary:focus-visible {
 
 .auth__card {
   border: 2px solid #000000;
-  padding: 48px;
+  padding: 40px;
   text-align: center;
   max-width: 520px;
   width: 100%;
@@ -446,9 +446,9 @@ summary:focus-visible {
 
 .listen__card {
   border: 2px solid #000000;
-  padding: 32px;
+  padding: 28px;
   display: grid;
-  gap: 20px;
+  gap: 16px;
   max-width: 520px;
   width: 100%;
   margin: 0 auto;
@@ -799,9 +799,9 @@ summary:focus-visible {
 
 .upload__card {
   border: 2px solid #000000;
-  padding: 40px;
+  padding: 56px;
   display: grid;
-  gap: 20px;
+  gap: 24px;
   text-align: center;
 }
 
@@ -865,6 +865,21 @@ summary:focus-visible {
 
   .page {
     padding: 16px;
+  }
+
+  .guest__card,
+  .auth__card {
+    padding: 28px 20px;
+  }
+
+  .listen__card {
+    padding: 22px;
+    gap: 14px;
+  }
+
+  .upload__card {
+    padding: 28px 20px;
+    gap: 16px;
   }
 
   .library__item {
