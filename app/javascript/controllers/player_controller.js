@@ -22,7 +22,10 @@ export default class extends Controller {
       this.audioTarget.volume = parseFloat(this.volumeTarget.value)
     }
     this.audioTarget.addEventListener("timeupdate", () => this.updateScrub())
-    this.audioTarget.addEventListener("loadedmetadata", () => this.syncScrubRange())
+    this.audioTarget.addEventListener("loadedmetadata", () => {
+      this.syncScrubRange()
+      this.updateScrub()
+    })
     this.audioTarget.addEventListener("ended", () => {
       this.updateToggleLabel()
       this.containerTarget.classList.add("hidden")
@@ -66,12 +69,14 @@ export default class extends Controller {
     })
   }
 
-  load({ url, title, artist, artwork, locked, autoplay, id }) {
+  load({ url, title, artist, artwork, locked, autoplay, id, prefetch }) {
     if (!url) return
 
     this.audioTarget.src = url
     this.currentUrl = url
-    this.trackPlay(id)
+    if (!prefetch) {
+      this.trackPlay(id)
+    }
     if (this.hasTitleTarget) {
       this.titleTarget.textContent = title || "Untitled"
     }
@@ -89,7 +94,9 @@ export default class extends Controller {
       }
     }
 
-    this.containerTarget.classList.remove("hidden")
+    if (!prefetch) {
+      this.containerTarget.classList.remove("hidden")
+    }
     this.containerTarget.classList.toggle("player--locked", locked)
 
     if (this.hasScrubTarget) {
@@ -155,10 +162,11 @@ export default class extends Controller {
   }
 
   updateScrub() {
-    if (!this.hasScrubTarget) return
     if (!this.audioTarget.duration) return
     const progress = (this.audioTarget.currentTime / this.audioTarget.duration) * 100
-    this.scrubTarget.value = progress
+    if (this.hasScrubTarget) {
+      this.scrubTarget.value = progress
+    }
     window.dispatchEvent(
       new CustomEvent("player:progress", {
         detail: {

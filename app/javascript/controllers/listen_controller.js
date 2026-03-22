@@ -23,6 +23,23 @@ export default class extends Controller {
       this.timerTarget.textContent = "0:00 / 0:00"
     }
 
+    if (this.urlValue) {
+      window.dispatchEvent(
+        new CustomEvent("player:load", {
+          detail: {
+            url: this.urlValue,
+            title: this.titleValue,
+            artist: this.artistValue,
+            artwork: this.artworkValue,
+            locked: true,
+            autoplay: false,
+            prefetch: true,
+            id: this.hasIdValue ? this.idValue : undefined
+          }
+        })
+      )
+    }
+
     window.addEventListener("player:ended", this.handleEnded)
     window.addEventListener("player:state", this.handleState)
     window.addEventListener("player:progress", this.handleProgress)
