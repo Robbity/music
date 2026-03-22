@@ -950,3 +950,8 @@ summary:focus-visible {
 .upload .button {
   margin-top: 6px;
 }
+
+.listen__timer {
+  font-size: 13px;
+  color: #3f3f3f;
+}

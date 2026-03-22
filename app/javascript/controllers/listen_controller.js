@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["rating", "stars", "submit", "play"]
+  static targets = ["rating", "stars", "submit", "play", "timer"]
   static values = {
     url: String,
     title: String,
@@ -19,14 +19,19 @@ export default class extends Controller {
     if (this.hasPlayTarget) {
       this.playTarget.textContent = "Play"
     }
+    if (this.hasTimerTarget) {
+      this.timerTarget.textContent = "0:00 / 0:00"
+    }
 
     window.addEventListener("player:ended", this.handleEnded)
     window.addEventListener("player:state", this.handleState)
+    window.addEventListener("player:progress", this.handleProgress)
   }
 
   disconnect() {
     window.removeEventListener("player:ended", this.handleEnded)
     window.removeEventListener("player:state", this.handleState)
+    window.removeEventListener("player:progress", this.handleProgress)
   }
 
   handleEnded = () => {
@@ -36,6 +41,13 @@ export default class extends Controller {
   handleState = (event) => {
     if (!this.hasPlayTarget) return
     this.playTarget.textContent = event.detail.playing ? "Pause" : "Play"
+  }
+
+  handleProgress = (event) => {
+    if (!this.hasTimerTarget) return
+    const { currentTime, duration } = event.detail
+    if (!duration) return
+    this.timerTarget.textContent = `${this.formatTime(currentTime)} / ${this.formatTime(duration)}`
   }
 
   togglePlayback() {
@@ -98,5 +110,12 @@ export default class extends Controller {
         }
       })
     )
+  }
+
+  formatTime(seconds) {
+    const clampedSeconds = Number.isFinite(seconds) ? Math.floor(seconds) : 0
+    const minutes = Math.floor(clampedSeconds / 60)
+    const remainder = clampedSeconds % 60
+    return `${minutes}:${String(remainder).padStart(2, "0")}`
   }
 }

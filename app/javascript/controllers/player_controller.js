@@ -159,6 +159,14 @@ export default class extends Controller {
     if (!this.audioTarget.duration) return
     const progress = (this.audioTarget.currentTime / this.audioTarget.duration) * 100
     this.scrubTarget.value = progress
+    window.dispatchEvent(
+      new CustomEvent("player:progress", {
+        detail: {
+          currentTime: this.audioTarget.currentTime,
+          duration: this.audioTarget.duration
+        }
+      })
+    )
   }
 
   updateToggleLabel() {
