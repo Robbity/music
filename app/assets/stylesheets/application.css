@@ -404,7 +404,8 @@ summary:focus-visible {
 
 .listen__artwork {
   width: 100%;
-  max-height: 60vh;
+  max-width: 520px;
+  aspect-ratio: 1 / 1;
   border: 2px solid #000000;
   border-radius: 18px;
   overflow: hidden;
