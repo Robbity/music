@@ -4,8 +4,10 @@ one:
   song: one
   user: one
   stars: 1
+  saved_to_library: true
 
 two:
   song: two
   user: two
   stars: 1
+  saved_to_library: false

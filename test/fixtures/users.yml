@@ -4,7 +4,9 @@
 one:
   email: one@example.com
   encrypted_password: <%= encrypted_password %>
+  username: one
 
 two:
   email: two@example.com
   encrypted_password: <%= encrypted_password %>
+  username: two
