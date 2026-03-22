@@ -6,27 +6,27 @@
 
     <%= form_with model: current_user, url: user_registration_path, method: :patch do |form| %>
       <div class="auth__field">
-        <%= form.label :username, "Username" %><br>
+        <%= form.label :username, "Username" %>
         <%= form.text_field :username, required: true, autocomplete: "username" %>
       </div>
 
       <div class="auth__field">
-        <%= form.label :email, "Email" %><br>
+        <%= form.label :email, "Email" %>
         <%= form.email_field :email, required: true, autocomplete: "email" %>
       </div>
 
       <div class="auth__field">
-        <%= form.label :password, "New password" %><br>
+        <%= form.label :password, "New password" %>
         <%= form.password_field :password, autocomplete: "new-password" %>
       </div>
 
       <div class="auth__field">
-        <%= form.label :password_confirmation, "Confirm new password" %><br>
+        <%= form.label :password_confirmation, "Confirm new password" %>
         <%= form.password_field :password_confirmation, autocomplete: "new-password" %>
       </div>
 
       <div class="auth__field">
-        <%= form.label :current_password, "Current password" %><br>
+        <%= form.label :current_password, "Current password" %>
         <%= form.password_field :current_password, required: true, autocomplete: "current-password" %>
       </div>
 

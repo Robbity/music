@@ -18,7 +18,7 @@
         <%= form.file_field :artwork, accept: "image/jpeg,image/png", data: { action: "change->artwork#preview", artwork_target: "input" } %>
       </label>
       <div class="auth__field">
-        <%= form.label :title, "Song name" %><br>
+        <%= form.label :title, "Song name" %>
         <%= form.text_field :title, required: true, class: "upload__input" %>
       </div>
 
