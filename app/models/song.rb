@@ -12,6 +12,8 @@ class Song < ApplicationRecord
   validate :artwork_type_and_size
 
   before_validation :set_artwork_color, on: :create
+  after_commit :enqueue_audio_normalization, on: :create
+  after_commit :enqueue_audio_normalization, on: :update, if: :saved_change_to_audio_file_attachment?
 
   MAX_AUDIO_SIZE = 20.megabytes
   MAX_ARTWORK_SIZE = 5.megabytes
@@ -64,5 +66,13 @@ class Song < ApplicationRecord
       unless ARTWORK_CONTENT_TYPES.include?(artwork.blob.content_type)
         errors.add(:artwork, "must be a JPEG or PNG")
       end
+    end
+
+    def enqueue_audio_normalization
+      return if Rails.env.test?
+      return unless audio_file.attached?
+      return if audio_file.blob.metadata["normalized_lufs"].present?
+
+      NormalizeAudioJob.perform_later(id)
     end
 end
