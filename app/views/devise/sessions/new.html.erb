@@ -4,6 +4,10 @@
     <%= link_to "← Back", root_path, class: "auth__back" %>
     <h1>Sign in</h1>
 
+    <% if flash[:alert].present? %>
+      <div class="auth__error" role="alert"><%= flash[:alert] %></div>
+    <% end %>
+
     <%= form_with scope: resource_name, url: session_path(resource_name) do |form| %>
       <div class="auth__field">
         <%= form.label :email, "Email or username" %><br>

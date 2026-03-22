@@ -356,9 +356,30 @@ summary:focus-visible {
 
 .auth__field {
   display: grid;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 4px;
+  margin-bottom: 12px;
   text-align: left;
+}
+
+.auth__card h1,
+.upload__card h1 {
+  margin: 0 0 12px;
+}
+
+.auth__error,
+.auth__errors {
+  margin: 8px 0 14px;
+  padding: 10px 12px;
+  border: 1px solid #b00020;
+  border-radius: 12px;
+  color: #b00020;
+  background: #fff5f6;
+  text-align: left;
+  list-style: none;
+}
+
+.auth__errors li + li {
+  margin-top: 6px;
 }
 
 .field-error {
@@ -834,6 +855,7 @@ summary:focus-visible {
   display: grid;
   gap: 8px;
   cursor: pointer;
+  margin-bottom: 8px;
 }
 
 .upload__drop input[type="file"] {
@@ -923,4 +945,8 @@ summary:focus-visible {
   border: 1px solid #000000;
   font-size: 18px;
   width: 100%;
+}
+
+.upload .button {
+  margin-top: 6px;
 }

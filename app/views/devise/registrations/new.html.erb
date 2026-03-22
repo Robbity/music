@@ -5,7 +5,7 @@
     <h1>Create account</h1>
 
     <% if resource.errors.any? %>
-      <ul>
+      <ul class="auth__errors" role="alert">
         <% resource.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
