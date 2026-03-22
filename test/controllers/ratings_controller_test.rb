@@ -36,7 +36,7 @@ class RatingsControllerTest < ActionDispatch::IntegrationTest
       post ratings_url, params: { rating: { song_id: song.id, stars: 3 } }
     end
 
-    assert_redirected_to listen_index_path
+    assert_redirected_to listen_index_path(prompt_rating_id: Rating.order(:id).last.id)
   end
 
   test "update saves rating to library" do
