@@ -1,6 +1,11 @@
 require "test_helper"
 
 class ListenControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    attach_audio(songs(:one))
+    attach_audio(songs(:two))
+  end
+
   test "index succeeds and does not increment plays" do
     song = songs(:one)
     original_count = song.plays_count

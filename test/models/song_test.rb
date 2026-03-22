@@ -1,5 +1,4 @@
 require "test_helper"
-require "stringio"
 
 class SongTest < ActiveSupport::TestCase
   test "requires title" do
@@ -50,14 +49,6 @@ class SongTest < ActiveSupport::TestCase
   end
 
   private
-    def attach_audio(song, content_type: "audio/mpeg")
-      song.audio_file.attach(
-        io: StringIO.new("audio"),
-        filename: "test.mp3",
-        content_type: content_type
-      )
-    end
-
     def attach_artwork(song, content_type: "image/png")
       song.artwork.attach(
         io: StringIO.new("image"),

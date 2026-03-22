@@ -5,6 +5,8 @@ SimpleCov.start "rails" do
   enable_coverage :branch
 end
 
+require "stringio"
+
 require_relative "../config/environment"
 require "rails/test_help"
 
@@ -17,6 +19,13 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    def attach_audio(song, content_type: "audio/mpeg")
+      song.audio_file.attach(
+        io: StringIO.new("audio"),
+        filename: "test.mp3",
+        content_type: content_type
+      )
+    end
   end
 end
 

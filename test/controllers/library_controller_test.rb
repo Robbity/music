@@ -1,6 +1,11 @@
 require "test_helper"
 
 class LibraryControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    attach_audio(songs(:one))
+    attach_audio(songs(:two))
+  end
+
   test "index requires authentication" do
     get library_index_url
 

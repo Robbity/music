@@ -1,6 +1,11 @@
 require "test_helper"
 
 class RatingsControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    attach_audio(songs(:one))
+    attach_audio(songs(:two))
+  end
+
   test "create blocks rating own song" do
     sign_in users(:one)
 
