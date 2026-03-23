@@ -4,7 +4,7 @@
       <div class="guest__card">
         <h1>Shuffle</h1>
         <p>Give small artists real feedback with no promo fees or algorithms.</p>
-        <p class="guest__note">Today’s top-rated track — based on real ratings.</p>
+        <p class="guest__note">Today’s top-rated track</p>
         <p class="listen__countdown" data-controller="countdown" data-countdown-target="output" data-countdown-until-value="<%= @next_update_at.iso8601 %>">Next song in --:--:--</p>
 
         <% if @song.present? %>
@@ -58,7 +58,7 @@
         <% else %>
           <div class="listen__placeholder"></div>
         <% end %>
-        <div class="listen__artwork-overlay">
+        <div class="listen__artwork-overlay" data-listen-target="overlay">
           <span class="listen__timer" data-listen-target="timer">0:00 / 0:00</span>
         </div>
       </div>

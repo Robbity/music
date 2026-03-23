@@ -465,13 +465,16 @@ summary:focus-visible {
   justify-content: center;
   opacity: 0;
   transition: opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
 }
 
-.listen__artwork[data-playing="true"] .listen__image {
+.listen__artwork.is-playing .listen__image {
   filter: blur(6px);
 }
 
-.listen__artwork[data-playing="true"] .listen__artwork-overlay {
+.listen__artwork.is-playing .listen__artwork-overlay,
+.listen__artwork-overlay.is-playing {
   opacity: 1;
 }
 

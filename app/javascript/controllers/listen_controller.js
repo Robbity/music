@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["rating", "stars", "submit", "play", "timer", "artwork"]
+  static targets = ["rating", "stars", "submit", "play", "timer", "artwork", "overlay"]
   static values = {
     url: String,
     title: String,
@@ -59,7 +59,11 @@ export default class extends Controller {
     if (!this.hasPlayTarget) return
     this.playTarget.textContent = event.detail.playing ? "Pause" : "Play"
     if (this.hasArtworkTarget) {
-      this.artworkTarget.dataset.playing = event.detail.playing ? "true" : "false"
+      const isPlaying = event.detail.playing
+      this.artworkTarget.classList.toggle("is-playing", isPlaying)
+      if (this.hasOverlayTarget) {
+        this.overlayTarget.classList.toggle("is-playing", isPlaying)
+      }
     }
   }
 
