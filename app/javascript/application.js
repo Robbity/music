@@ -48,12 +48,12 @@ const setupConfirmModal = () => {
     }
   })
 
-  window.Turbo.setConfirmMethod((messageText, element) => {
+  window.Turbo.config.forms.confirm = (messageText, element) => {
     open(messageText, element)
     return new Promise((resolve) => {
       resolver = resolve
     })
-  })
+  }
 }
 
 document.addEventListener("turbo:load", setupConfirmModal)
