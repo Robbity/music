@@ -67,6 +67,26 @@
       </div>
     </div>
 
+    <div id="rating-modal" class="modal hidden" aria-hidden="true" data-controller="rating-modal">
+      <div class="modal__overlay" data-action="click->rating-modal#close"></div>
+      <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="rating-title">
+        <h2 id="rating-title" class="modal__title">Adjust rating</h2>
+        <%= form_with url: "#", method: :patch, data: { rating_modal_target: "form" } do |form| %>
+          <fieldset class="rating" data-rating-modal-target="stars">
+            <legend>Update your rating</legend>
+            <% 5.downto(1) do |star| %>
+              <%= form.radio_button :stars, star, id: "rating-modal-#{star}" %>
+              <%= form.label :stars, "★", for: "rating-modal-#{star}" %>
+            <% end %>
+          </fieldset>
+          <div class="modal__actions">
+            <button type="button" class="button button--ghost" data-action="rating-modal#close">Cancel</button>
+            <%= form.submit "Save rating", class: "button" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
     <div class="player hidden" data-player-target="container">
       <audio data-player-target="audio"></audio>
       <div class="player__dock" role="group" aria-label="Audio volume">

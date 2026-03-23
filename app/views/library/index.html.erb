@@ -42,6 +42,15 @@
             <summary>•••</summary>
             <div class="menu">
               <%= link_to "Download", rails_blob_path(rating.song.audio_file, disposition: "attachment"), class: "menu__item" %>
+              <button
+                type="button"
+                class="menu__item"
+                data-action="rating-modal#open"
+                data-rating-id="<%= rating.id %>"
+                data-rating-stars="<%= rating.stars %>"
+              >
+                Adjust rating
+              </button>
               <%= button_to "Remove", rating_path(rating), method: :delete, class: "menu__item", data: { turbo_confirm: "Remove this song from your library?" } %>
             </div>
           </details>

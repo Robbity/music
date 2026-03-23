@@ -41,8 +41,13 @@ class RatingsController < ApplicationController
 
   def update
     rating = current_user.ratings.find(params[:id])
-    rating.update!(saved_to_library: true)
-    redirect_to listen_index_path
+    if params[:rating]&.key?(:stars)
+      rating.update!(stars: params[:rating][:stars])
+      redirect_back fallback_location: library_index_path
+    else
+      rating.update!(saved_to_library: true)
+      redirect_to listen_index_path
+    end
   end
 
   def destroy

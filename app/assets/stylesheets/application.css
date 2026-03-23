@@ -102,6 +102,10 @@ body {
   flex-wrap: wrap;
 }
 
+.modal__dialog .rating {
+  justify-content: center;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
