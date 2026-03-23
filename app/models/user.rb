@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   has_many :songs, dependent: :destroy
   has_many :ratings, dependent: :destroy
+  has_many :daily_songs, dependent: :destroy
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup

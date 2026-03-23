@@ -1,6 +1,7 @@
 class Song < ApplicationRecord
   belongs_to :user
   has_many :ratings, dependent: :destroy
+  has_many :daily_songs, dependent: :destroy
 
   has_one_attached :audio_file
   has_one_attached :artwork

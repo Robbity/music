@@ -86,6 +86,15 @@
           <div class="listen__prompt">
             <p>You already rated this song.</p>
             <div class="listen__post-actions">
+              <button
+                type="button"
+                class="button"
+                data-action="rating-modal#open"
+                data-rating-id="<%= @user_rating.id %>"
+                data-rating-stars="<%= @user_rating.stars %>"
+              >
+                Change rating
+              </button>
               <%= button_to "Add to library", rating_path(@user_rating), method: :patch, class: "button" %>
             </div>
           </div>
