@@ -455,6 +455,8 @@ summary:focus-visible {
   height: 100%;
   object-fit: cover;
   transition: filter 0.5s ease;
+  position: relative;
+  z-index: 0;
 }
 
 .listen__artwork-overlay {
@@ -467,6 +469,7 @@ summary:focus-visible {
   transition: opacity 0.3s ease;
   background: rgba(0, 0, 0, 0.55);
   pointer-events: none;
+  z-index: 1;
 }
 
 .listen__artwork.is-playing .listen__image {
@@ -475,6 +478,14 @@ summary:focus-visible {
 
 .listen__artwork.is-playing .listen__artwork-overlay,
 .listen__artwork-overlay.is-playing {
+  opacity: 1;
+}
+
+.listen__artwork:hover .listen__image {
+  filter: blur(6px);
+}
+
+.listen__artwork:hover .listen__artwork-overlay {
   opacity: 1;
 }
 
