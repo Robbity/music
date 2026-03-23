@@ -71,4 +71,4 @@ group :test do
   gem "simplecov", require: false
 end
 
-gem "aws-sdk-s3", "~> 1.216"
+gem "aws-sdk-s3", "~> 1.217"
