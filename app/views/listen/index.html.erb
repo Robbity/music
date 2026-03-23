@@ -4,6 +4,7 @@
       <div class="guest__card">
         <h1>Shuffle</h1>
         <p>Discover music anonymously. Listen once, rate once, move on.</p>
+        <p class="listen__countdown" data-controller="countdown" data-countdown-target="output" data-countdown-until-value="<%= @next_update_at.iso8601 %>">Next song in --:--:--</p>
 
         <% if @song.present? %>
           <div class="guest__song">
@@ -62,6 +63,8 @@
         <h1><%= @song.title %></h1>
         <p>Uploaded by <strong><%= @song.user.username %></strong></p>
       </div>
+
+      <p class="listen__countdown" data-controller="countdown" data-countdown-target="output" data-countdown-until-value="<%= @next_update_at.iso8601 %>">Next song in --:--:--</p>
 
       <% unless @user_rating&.saved_to_library %>
         <div class="listen__player">

@@ -991,3 +991,10 @@ summary:focus-visible {
   font-size: 13px;
   color: #3f3f3f;
 }
+
+.listen__countdown {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #3f3f3f;
+}
