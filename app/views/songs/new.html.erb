@@ -13,7 +13,13 @@
     <% end %>
 
     <%= form_with model: @song do |form| %>
-      <label class="upload__artwork" data-controller="artwork" data-artwork-target="preview" style="background-color: <%= palette.sample %>">
+      <label
+        class="upload__artwork"
+        data-controller="artwork"
+        data-artwork-target="preview"
+        data-action="dragover->artwork#dragOver dragleave->artwork#dragLeave drop->artwork#drop"
+        style="background-color: <%= palette.sample %>"
+      >
         <span>Click or drag artwork</span>
         <%= form.file_field :artwork, accept: "image/jpeg,image/png", data: { action: "change->artwork#preview", artwork_target: "input" } %>
       </label>
@@ -22,10 +28,16 @@
         <%= form.text_field :title, required: true, class: "upload__input" %>
       </div>
 
-      <label class="upload__drop">
+      <label
+        class="upload__drop"
+        data-controller="audio-upload"
+        data-audio-upload-target="drop"
+        data-action="dragover->audio-upload#dragOver dragleave->audio-upload#dragLeave drop->audio-upload#drop"
+      >
         <span>Click or drag audio here</span>
         <small>MP3 or WAV</small>
-        <%= form.file_field :audio_file, required: true, direct_upload: true, accept: "audio/mpeg,audio/mp3,audio/wav,audio/x-wav,audio/wave,audio/vnd.wave" %>
+        <span class="upload__file-name" data-audio-upload-target="name">No file selected</span>
+        <%= form.file_field :audio_file, required: true, direct_upload: true, accept: "audio/mpeg,audio/mp3,audio/wav,audio/x-wav,audio/wave,audio/vnd.wave", data: { action: "change->audio-upload#update", audio_upload_target: "input" } %>
       </label>
 
       <%= form.submit "Upload", class: "button" %>
