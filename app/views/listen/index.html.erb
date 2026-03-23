@@ -5,7 +5,7 @@
         <h1>Shuffle</h1>
         <p>Give small artists real feedback with no promo fees or algorithms.</p>
         <p class="guest__note">Today’s top-rated track</p>
-        <p class="listen__countdown" data-controller="countdown" data-countdown-target="output" data-countdown-until-value="<%= @next_update_at.iso8601 %>">Next song in --:--:--</p>
+        <p class="listen__countdown listen__countdown--guest" data-controller="countdown" data-countdown-target="output" data-countdown-until-value="<%= @next_update_at.iso8601 %>">Next track in --:--:--</p>
 
         <% if @song.present? %>
           <div class="guest__song">

@@ -1047,3 +1047,10 @@ summary:focus-visible {
   font-weight: 700;
   text-shadow: none;
 }
+
+.listen__countdown--guest {
+  font-size: 12px;
+  color: #000000;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
