@@ -22,7 +22,7 @@ export default class extends Controller {
     const hours = Math.floor(diff / 3_600_000)
     const minutes = Math.floor((diff % 3_600_000) / 60_000)
     const seconds = Math.floor((diff % 60_000) / 1000)
-    this.outputTarget.textContent = `Next song in ${this.format(hours)}:${this.format(minutes)}:${this.format(seconds)}`
+    this.outputTarget.textContent = `${this.format(hours)}:${this.format(minutes)}:${this.format(seconds)}`
   }
 
   format(value) {
