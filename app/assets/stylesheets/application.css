@@ -481,6 +481,10 @@ summary:focus-visible {
   opacity: 1;
 }
 
+.listen__artwork.is-playing .listen__artwork-overlay {
+  opacity: 0;
+}
+
 .listen__artwork:hover .listen__image {
   filter: blur(6px);
 }
@@ -1037,9 +1041,9 @@ summary:focus-visible {
 }
 
 .listen__countdown {
-  font-size: 18px;
+  font-size: 22px;
   letter-spacing: 0.08em;
   color: #ffffff;
   font-weight: 700;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  text-shadow: none;
 }
