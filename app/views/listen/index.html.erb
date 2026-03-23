@@ -59,7 +59,7 @@
           <div class="listen__placeholder"></div>
         <% end %>
         <div class="listen__artwork-overlay" data-listen-target="overlay">
-          <span class="listen__timer" data-listen-target="timer">0:00 / 0:00</span>
+          <span class="listen__countdown" data-controller="countdown" data-countdown-target="output" data-countdown-until-value="<%= @next_update_at.iso8601 %>">Next song in --:--:--</span>
         </div>
       </div>
 
@@ -68,12 +68,11 @@
         <p>Uploaded by <strong><%= @song.user.username %></strong></p>
       </div>
 
-      <p class="listen__countdown" data-controller="countdown" data-countdown-target="output" data-countdown-until-value="<%= @next_update_at.iso8601 %>">Next song in --:--:--</p>
-
       <% unless @user_rating&.saved_to_library %>
         <div class="listen__player">
           <div class="listen__controls">
             <button class="button" type="button" data-action="listen#togglePlayback" data-listen-target="play">Play</button>
+            <span class="listen__timer" data-listen-target="timer">0:00 / 0:00</span>
           </div>
         </div>
       <% end %>
