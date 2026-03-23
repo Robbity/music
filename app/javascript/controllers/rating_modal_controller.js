@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["form", "stars"]
+  static targets = ["form", "stars", "modal"]
 
   connect() {
     this.boundKeydown = (event) => {
@@ -26,12 +26,12 @@ export default class extends Controller {
       input.checked = input.value === ratingStars
     })
 
-    this.element.classList.remove("hidden")
-    this.element.setAttribute("aria-hidden", "false")
+    this.modalTarget.classList.remove("hidden")
+    this.modalTarget.setAttribute("aria-hidden", "false")
   }
 
   close() {
-    this.element.classList.add("hidden")
-    this.element.setAttribute("aria-hidden", "true")
+    this.modalTarget.classList.add("hidden")
+    this.modalTarget.setAttribute("aria-hidden", "true")
   }
 }
