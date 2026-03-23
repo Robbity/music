@@ -71,7 +71,7 @@
       <div class="modal__overlay" data-action="click->rating-modal#close"></div>
       <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="rating-title">
         <h2 id="rating-title" class="modal__title">Adjust rating</h2>
-        <%= form_with url: "#", method: :patch, data: { rating_modal_target: "form" } do |form| %>
+        <%= form_with url: "#", method: :patch, scope: :rating, data: { rating_modal_target: "form" } do |form| %>
           <fieldset class="rating" data-rating-modal-target="stars">
             <legend>Update your rating</legend>
             <% 5.downto(1) do |star| %>
