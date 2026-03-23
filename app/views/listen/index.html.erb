@@ -3,7 +3,8 @@
     <section class="guest">
       <div class="guest__card">
         <h1>Shuffle</h1>
-        <p>Discover music anonymously. Listen once, rate once, move on.</p>
+        <p>Give small artists real feedback with no promo fees or algorithms.</p>
+        <p class="guest__note">Today’s top-rated track — based on real ratings.</p>
         <p class="listen__countdown" data-controller="countdown" data-countdown-target="output" data-countdown-until-value="<%= @next_update_at.iso8601 %>">Next song in --:--:--</p>
 
         <% if @song.present? %>
@@ -51,12 +52,15 @@
     </section>
   <% elsif @song.present? %>
     <div class="listen__card">
-      <div class="listen__artwork" style="background-color: <%= @song.artwork_color %>">
+      <div class="listen__artwork" data-listen-target="artwork" style="background-color: <%= @song.artwork_color %>">
         <% if @song.artwork.attached? %>
           <%= image_tag @song.artwork, alt: "Artwork for #{@song.title}", class: "listen__image" %>
         <% else %>
           <div class="listen__placeholder"></div>
         <% end %>
+        <div class="listen__artwork-overlay">
+          <span class="listen__timer" data-listen-target="timer">0:00 / 0:00</span>
+        </div>
       </div>
 
       <div class="listen__meta">
@@ -70,7 +74,6 @@
         <div class="listen__player">
           <div class="listen__controls">
             <button class="button" type="button" data-action="listen#togglePlayback" data-listen-target="play">Play</button>
-            <span class="listen__timer" data-listen-target="timer">0:00 / 0:00</span>
           </div>
         </div>
       <% end %>
