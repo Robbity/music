@@ -1,24 +1,26 @@
-# README
+# Shuffle
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Shuffle is a music listening app focused on giving small artists real feedback without promotion fees or algorithmic feeds. Users get a daily track, rate it once, and can choose to save it to their library. Guests see the top-rated track of the day, while signed-in users receive a consistent daily pick.
 
-Things you may want to cover:
+## Tech stack
 
-* Ruby version
+- Ruby on Rails 8.1
+- Hotwire (Turbo and Stimulus) with importmap for frontend behavior
+- PostgreSQL for data
+- Active Storage with S3 for audio and artwork
+- Minitest with SimpleCov for testing
+- Docker and Kamal for deployment
 
-* System dependencies
+## Development
 
-* Configuration
+Run the app:
 
-* Database creation
+```sh
+bin/rails server
+```
 
-* Database initialization
+Run tests:
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```sh
+bin/rails test
+```
