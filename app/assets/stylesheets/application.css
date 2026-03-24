@@ -1011,7 +1011,8 @@ summary:focus-visible {
   }
 
   .library__item {
-    grid-template-columns: 64px 1fr;
+    grid-template-columns: 64px 1fr auto;
+    align-items: start;
   }
 
   .library__artwork {
@@ -1020,8 +1021,9 @@ summary:focus-visible {
   }
 
   .library__stats {
-    justify-self: start;
-    text-align: left;
+    justify-self: end;
+    text-align: right;
+    gap: 4px;
   }
 
   .player {
