@@ -52,7 +52,7 @@ class RatingsController < ApplicationController
 
   def destroy
     rating = current_user.ratings.find(params[:id])
-    rating.destroy
+    rating.update!(saved_to_library: false)
     redirect_to library_index_path, notice: "Removed from your library."
   end
 end
