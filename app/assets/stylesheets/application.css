@@ -11,15 +11,9 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
 
-@font-face {
-  font-family: "UCity";
-  src: url("/assets/UCity.woff") format("woff");
-  font-display: swap;
-}
-
 :root {
   color-scheme: light;
-  font-family: "Questrial", "UCity", "Georgia", "Times New Roman", serif;
+  font-family: "Questrial", "Georgia", "Times New Roman", serif;
   color: #000000;
   background-color: #ffffff;
 }
@@ -610,7 +604,7 @@ summary:focus-visible {
 
 .library__item {
   display: grid;
-  grid-template-columns: 96px 1fr auto;
+  grid-template-columns: 96px 1fr 200px auto;
   gap: 16px;
   align-items: center;
   padding: 12px;
@@ -656,6 +650,26 @@ summary:focus-visible {
   font-size: 11px;
   margin-right: 4px;
   color: #000000;
+  font-synthesis: weight;
+}
+
+.library__stats {
+  display: grid;
+  gap: 6px;
+  justify-self: end;
+  text-align: right;
+}
+
+.library__stat {
+  display: grid;
+  gap: 2px;
+}
+
+.library__value {
+  font-weight: 700;
+  font-size: 14px;
+  color: #000000;
+  font-synthesis: weight;
 }
 
 .library__artwork {
@@ -998,12 +1012,17 @@ summary:focus-visible {
   }
 
   .library__item {
-    grid-template-columns: 64px 1fr auto;
+    grid-template-columns: 64px 1fr;
   }
 
   .library__artwork {
     width: 64px;
     height: 64px;
+  }
+
+  .library__stats {
+    justify-self: start;
+    text-align: left;
   }
 
   .player {
