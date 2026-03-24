@@ -57,3 +57,16 @@ const setupConfirmModal = () => {
 }
 
 document.addEventListener("turbo:load", setupConfirmModal)
+
+document.addEventListener("turbo:load", () => {
+  if (document.body.dataset.menuCloseBound === "true") return
+  document.body.dataset.menuCloseBound = "true"
+
+  document.addEventListener("click", (event) => {
+    document.querySelectorAll("details[open]").forEach((details) => {
+      if (!details.contains(event.target)) {
+        details.removeAttribute("open")
+      }
+    })
+  })
+})

@@ -36,15 +36,15 @@
           <div class="library__title"><%= song.title %></div>
           <div class="library__artist">by <%= song.user.username %></div>
           <div class="library__meta">
-            <span class="library__metric">Plays: <%= song.plays_count || 0 %></span>
+            <span class="library__metric"><span class="library__label">Plays</span> <%= song.plays_count || 0 %></span>
             <span class="library__metric">
               <% if average.present? %>
-                Average rating: <%= average.round(1) %> / 5
+                <span class="library__label">Average rating</span> <%= average.round(1) %> / 5
               <% else %>
-                No ratings yet
+                <span class="library__label">Average rating</span> No ratings yet
               <% end %>
             </span>
-            <span class="library__metric">(<%= rating_count %> ratings)</span>
+            <span class="library__metric"><span class="library__label">Ratings</span> <%= rating_count %></span>
           </div>
         </div>
         <div class="library__actions">

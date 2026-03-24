@@ -33,8 +33,8 @@
           <div class="library__title"><%= rating.song.title %></div>
           <div class="library__artist">by <%= rating.song.user.username %></div>
           <div class="library__rating">
-            <span class="library__metric">Rating: <%= "★" * rating.stars %><%= "☆" * (5 - rating.stars) %></span>
-            <span class="library__date"><%= rating.created_at.strftime("%b %d, %Y") %></span>
+            <span class="library__metric"><span class="library__label">Rating</span> <%= "★" * rating.stars %><%= "☆" * (5 - rating.stars) %></span>
+            <span class="library__date"><span class="library__label">Date</span> <%= rating.created_at.strftime("%b %d, %Y") %></span>
           </div>
         </div>
         <div class="library__actions">
