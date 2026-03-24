@@ -650,7 +650,7 @@ summary:focus-visible {
   font-size: 11px;
   margin-right: 4px;
   color: #000000;
-  font-synthesis: weight;
+  -webkit-text-stroke: 0.3px currentColor;
 }
 
 .library__stats {
@@ -669,7 +669,7 @@ summary:focus-visible {
   font-weight: 700;
   font-size: 14px;
   color: #000000;
-  font-synthesis: weight;
+  -webkit-text-stroke: 0.35px currentColor;
 }
 
 .library__artwork {
