@@ -669,7 +669,6 @@ summary:focus-visible {
   font-weight: 700;
   font-size: 14px;
   color: #000000;
-  -webkit-text-stroke: 0.35px currentColor;
 }
 
 .library__artwork {
