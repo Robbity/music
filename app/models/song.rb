@@ -13,8 +13,7 @@ class Song < ApplicationRecord
   validate :artwork_type_and_size
 
   before_validation :set_artwork_color, on: :create
-  after_commit :enqueue_audio_normalization, on: :create
-  after_commit :enqueue_audio_normalization, on: :update, if: :saved_change_to_audio_file_attachment?
+  after_commit :enqueue_audio_normalization, on: %i[create update]
 
   MAX_AUDIO_SIZE = 20.megabytes
   MAX_ARTWORK_SIZE = 5.megabytes
