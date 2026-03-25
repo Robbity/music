@@ -32,4 +32,14 @@ class ListenControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_match songs(:one).title, response.body
   end
+
+  test "guest sees top rated song of today" do
+    ratings(:one).update!(song: songs(:one), stars: 5, created_at: Time.zone.now)
+    ratings(:two).update!(song: songs(:two), stars: 2, created_at: Time.zone.now)
+
+    get listen_index_url
+
+    assert_response :success
+    assert_match songs(:one).title, response.body
+  end
 end
