@@ -23,4 +23,13 @@ class ListenControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test "signed in sees daily song for today" do
+    sign_in users(:one)
+
+    get listen_index_url
+
+    assert_response :success
+    assert_match songs(:one).title, response.body
+  end
 end

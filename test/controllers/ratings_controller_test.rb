@@ -50,6 +50,17 @@ class RatingsControllerTest < ActionDispatch::IntegrationTest
     assert rating.reload.saved_to_library
   end
 
+  test "update changes rating stars" do
+    sign_in users(:one)
+    rating = ratings(:one)
+    rating.update!(user: users(:one), stars: 2)
+
+    patch rating_url(rating), params: { rating: { stars: 5 } }, headers: { "HTTP_REFERER" => library_index_url }
+
+    assert_redirected_to library_index_path
+    assert_equal 5, rating.reload.stars
+  end
+
   test "destroy removes rating" do
     sign_in users(:one)
     rating = ratings(:one)

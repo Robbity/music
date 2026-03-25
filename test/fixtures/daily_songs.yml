@@ -1,0 +1,4 @@
+today_one:
+  user: one
+  song: one
+  date: <%= Date.current %>
