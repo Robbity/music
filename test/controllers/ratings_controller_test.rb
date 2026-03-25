@@ -55,10 +55,9 @@ class RatingsControllerTest < ActionDispatch::IntegrationTest
     rating = ratings(:one)
     rating.update!(user: users(:one))
 
-    assert_difference("Rating.count", -1) do
-      delete rating_url(rating)
-    end
+    delete rating_url(rating)
 
     assert_redirected_to library_index_path
+    refute rating.reload.saved_to_library
   end
 end
