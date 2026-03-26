@@ -11,6 +11,7 @@ class Song < ApplicationRecord
 
   validate :audio_file_type_and_size
   validate :artwork_type_and_size
+  validate :daily_upload_limit, on: :create
 
   before_validation :set_artwork_color, on: :create
   after_commit :enqueue_audio_normalization, on: %i[create update]
@@ -66,6 +67,15 @@ class Song < ApplicationRecord
       unless ARTWORK_CONTENT_TYPES.include?(artwork.blob.content_type)
         errors.add(:artwork, "must be a JPEG or PNG")
       end
+    end
+
+    def daily_upload_limit
+      return unless user
+
+      already_uploaded = user.songs.where(created_at: Time.zone.today.all_day).exists?
+      return unless already_uploaded
+
+      errors.add(:base, "You can upload one song per day.")
     end
 
     def enqueue_audio_normalization

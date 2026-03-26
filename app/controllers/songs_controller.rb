@@ -1,6 +1,7 @@
 class SongsController < ApplicationController
   before_action :authenticate_user!
   skip_before_action :authenticate_user!, only: :play
+  before_action :set_upload_state, only: %i[new create]
 
   def index
     base = current_user.songs
@@ -27,9 +28,16 @@ class SongsController < ApplicationController
   def create
     @song = current_user.songs.new(song_params)
 
+    if @upload_locked
+      @song.errors.add(:base, "You can upload one song per day.")
+      render :new, status: :unprocessable_entity
+      return
+    end
+
     if @song.save
       redirect_to songs_path, notice: "Song uploaded."
     else
+      @upload_locked = upload_limit_reached?
       render :new, status: :unprocessable_entity
     end
   end
@@ -49,5 +57,14 @@ class SongsController < ApplicationController
   private
     def song_params
       params.require(:song).permit(:title, :audio_file, :artwork)
+    end
+
+    def set_upload_state
+      @upload_locked = upload_limit_reached?
+      @next_upload_at = Time.zone.tomorrow.beginning_of_day
+    end
+
+    def upload_limit_reached?
+      current_user.songs.where(created_at: Time.zone.today.all_day).exists?
     end
 end
