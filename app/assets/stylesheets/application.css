@@ -135,6 +135,7 @@ summary:focus-visible {
   flex-direction: column;
   gap: 4px;
   line-height: 1.1;
+  pointer-events: none;
 }
 
 .upload__label {
