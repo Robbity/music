@@ -68,5 +68,17 @@
 <% end %>
 
 <div class="library__footer">
-  <%= link_to "+ Add track", new_song_path, class: "button" %>
+  <% if @upload_locked %>
+    <span class="button button--muted" aria-disabled="true">
+      <span class="upload__label">Next upload in</span>
+      <span
+        class="listen__countdown"
+        data-controller="countdown"
+        data-countdown-target="output"
+        data-countdown-until-value="<%= @next_upload_at.iso8601 %>"
+      >--:--:--</span>
+    </span>
+  <% else %>
+    <%= link_to "+ Add track", new_song_path, class: "button" %>
+  <% end %>
 </div>

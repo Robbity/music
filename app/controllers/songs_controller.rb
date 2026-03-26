@@ -8,6 +8,10 @@ class SongsController < ApplicationController
       .with_attached_artwork
       .with_attached_audio_file
       .includes(:ratings)
+    if current_user.songs.where(created_at: Time.zone.today.all_day).exists?
+      @upload_locked = true
+      @next_upload_at = Time.zone.tomorrow.beginning_of_day
+    end
 
     @songs = case params[:sort]
     when "plays"
@@ -22,6 +26,10 @@ class SongsController < ApplicationController
   end
 
   def new
+    if @upload_locked
+      redirect_to songs_path, alert: "You can upload one song per day."
+      return
+    end
     @song = current_user.songs.new
   end
 
